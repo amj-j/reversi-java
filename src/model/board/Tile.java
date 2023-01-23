@@ -1,4 +1,6 @@
-package model;
+package model.board;
+
+import model.Player;
 
 public class Tile {
     private Player owner = null;

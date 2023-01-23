@@ -1,17 +1,29 @@
 package model;
+import model.board.Board;
+import model.board.Tile;
+import model.enums.Neighbours;
 import utils.Defaults;
 
 public class Game {
-    private Board board = new Board(8);
-    Player player1 = new Player(Defaults.PLAYER1_NAME);
-    Player player2 = new Player(Defaults.PLAYER2_NAME);
+    private Board board;
+    private Player player1;
+    private Player player2;
     
-    public Game() {
-        //create board
-        //create gui
-        //add initial four tokens to board
-        //
+    public Game(int boardSize) {
+        this.board = new Board(boardSize);
+        this.player1 = new Player(Defaults.PLAYER1_NAME);
+        this.player2 = new Player(Defaults.PLAYER2_NAME);
+
+        initTokens();
     }
+
+    private void initTokens() {
+        int size = board.getSize();
+        Coords tokenCoords = new Coords(size/2, size/2);
+
+    }
+
+    public void setTileOwnerByCoords()
 
     public void setPlayableTiles(Player playingPlayer) {
         for (int x = 0; x < board.getSize(); ++x) {

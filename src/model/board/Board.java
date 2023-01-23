@@ -1,14 +1,11 @@
-package model;
-import utils.Defaults;
+package model.board;
+
+import model.Coords;
+import model.Player;
 
 public class Board {
     private Tile[][] tiles;
     private final int size;
-
-    public Board() {
-        tiles = new Tile[Defaults.BOARD_SIZE][Defaults.BOARD_SIZE];
-        this.size = Defaults.BOARD_SIZE; 
-    }
     
     public Board(int boardSize) {
         tiles = new Tile[boardSize][boardSize];
@@ -16,9 +13,9 @@ public class Board {
         
     }
 
-    public Tile getTile(int x, int y) {
+    public Tile getTile(Coords coords) {
         try {
-            return tiles[x][y];
+            return tiles[coords.x][coords.y];
         }
         catch(Exception e) {
             return null;
@@ -28,5 +25,9 @@ public class Board {
 
     public int getSize() {
         return this.size;
+    }
+
+    public void setTileOwner(Player newOwner, Coords coords) {
+
     }
 }

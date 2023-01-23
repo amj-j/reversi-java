@@ -1,4 +1,4 @@
-package model;
+package model.enums;
 
 public enum Neighbours {
     UP(0, 1),

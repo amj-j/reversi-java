@@ -1,5 +1,11 @@
 package model;
 
-public class ReversiModel {
-    
+import utils.Defaults;
+
+public class ReversiModel implements ReversiModelInterface {
+
+    public ReversiModel() {
+
+    }
+
 }

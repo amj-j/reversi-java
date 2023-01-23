@@ -1,27 +1,17 @@
 package model;
 
 public class Player {
-    private String name;
-    private int tokenNum;
+    private int tokenCount;
 
-    public Player(String name) {
-        this.name = name;
-        tokenNum = 0;
+    public Player() {
+        this.tokenCount = 0;
     }
 
-    public String getName() {
-        return this.name;
+    public int getTokenCount() {
+        return this.tokenCount;
     }
 
-    public int getTokenNum() {
-        return this.tokenNum;
-    }
-
-    public void changeName(String name) {
-        this.name = name;
-    }
-
-    public void changeTokenNum(int amount) {
-        this.tokenNum += amount;
+    public void changeTokenCount(int amount) {
+        this.tokenCount += amount;
     }
 }
