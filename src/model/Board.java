@@ -1,4 +1,4 @@
-package logic;
+package model;
 import utils.Defaults;
 
 public class Board {
@@ -24,15 +24,6 @@ public class Board {
             return null;
         }
         
-    }
-
-    public Tile getNeighbour(Neighbours neighbour) {
-        try {
-            return tiles[neighbour.getX()][neighbour.getY()];
-        }
-        catch(Exception e) {
-            return null;
-        }
     }
 
     public int getSize() {

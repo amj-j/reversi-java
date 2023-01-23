@@ -1,4 +1,4 @@
-package logic;
+package model;
 
 public enum Neighbours {
     UP(0, 1),

@@ -1,4 +1,4 @@
-package logic;
+package model;
 
 public class Tile {
     private Player owner = null;

@@ -1,4 +1,4 @@
-package logic;
+package model;
 import utils.Defaults;
 
 public class Game {
@@ -7,7 +7,10 @@ public class Game {
     Player player2 = new Player(Defaults.PLAYER2_NAME);
     
     public Game() {
-        
+        //create board
+        //create gui
+        //add initial four tokens to board
+        //
     }
 
     public void setPlayableTiles(Player playingPlayer) {
@@ -26,7 +29,13 @@ public class Game {
         }
     }
 
-    public void followLine(int x, int y, Player lineOwner, Neighbours neighbour) {
-        
+    public Tile followLine(int x, int y, Player lineOwner, Neighbours nextTile) {
+        Tile tile;
+        do {
+            x += nextTile.getX();
+            y += nextTile.getY();
+            tile = board.getTile(x,y);
+        } while (tile.getOwner() == lineOwner);
+        return tile;
     }
 }
