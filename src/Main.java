@@ -1,14 +1,14 @@
-import model.Model;
-import view.View;
-import controller.Controller;
+import model.ReversiModel;
+import view.ReversiView;
+import controller.ReversiController;
 
 public class Main {
     public static void main(String[] args) {
-        View theView = new View();
+        ReversiView theView = new ReversiView();
         
-    	Model theModel = new Model();
+    	ReversiModel theModel = new ReversiModel();
         
-        Controller theController = new Controller(theView, theModel);
+        ReversiController theController = new ReversiController(theView, theModel);
         
         theView.setVisible(true);
     }
