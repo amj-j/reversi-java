@@ -1,19 +1,20 @@
 package model.board;
 
+import java.util.Arrays;
 import model.Coords;
-import model.Player;
+import model.enums.TileStatus;
 
 public class Board {
-    private Tile[][] tiles;
+    private TileStatus[][] tiles;
     private final int size;
     
     public Board(int boardSize) {
-        tiles = new Tile[boardSize][boardSize];
+        tiles = new TileStatus[boardSize][boardSize];
         this.size = boardSize;
-        
+        Arrays.fill(tiles, TileStatus.VACANT);
     }
 
-    public Tile getTile(Coords coords) {
+    public TileStatus getTileStatus(Coords coords) {
         try {
             return tiles[coords.x][coords.y];
         }
@@ -27,7 +28,7 @@ public class Board {
         return this.size;
     }
 
-    public void setTileOwner(Player newOwner, Coords coords) {
-
+    public void setTileStatus(TileStatus status, Coords coords) {
+        tiles[coords.x][coords.y] = status;
     }
 }
