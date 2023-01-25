@@ -8,8 +8,8 @@ import graphic_info.Owner;
 public class Board {
     private Owner[][] tiles;
     private final int size;
-    public int player1TokenCount;
-    public int player2TokenCount;
+    private int player1TokenCount;
+    private int player2TokenCount;
     
     protected Board(int boardSize) {
         tiles = new Owner[boardSize][boardSize];
@@ -36,5 +36,11 @@ public class Board {
         tiles[coords.x][coords.y] = owner;
     }
 
+    public int getPlayer1TokenCount() {
+        return this.player1TokenCount;
+    }
 
+    public int getPlayer2TokenCount() {
+        return this.player2TokenCount;
+    }
 }

@@ -10,13 +10,13 @@ public interface ReversiModelInterface {
     public void newGame(int boardSize, boolean singleplayer);
     public int getBoardSize();
     public void toggleCurrPlayer();
-    public void setPlayableTiles(Owner owner);
+    public void setPlayableTiles();
     public boolean canPlay(Coords coords);
     public boolean isSingleplayer();
-    public void play(Coords coords);
-    public void playOpponent();
     public BoardChange getBoardChange();
     public BoardChange getBoardStatus();
     public ArrayList<Coords> getPlayableTiles();
+    public void play(Coords coords);
+    public void playOpponent();
     public boolean isGameOver();
 }

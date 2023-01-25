@@ -73,10 +73,21 @@ public class ReversiModel implements ReversiModelInterface {
         return this.boardChange;
     }
 
+    public BoardChange getBoardStatus() {
+        BoardChange change = new BoardChange(null, board.getPlayer1TokenCount(), board.getPlayer2TokenCount());
+        for (int x = 0; x < board.getSize(); ++x) {
+            for (int y = 0; y < board.getSize(); ++y) {
+                Coords coords = new Coords(x,y);
+                TileInfo tile = new TileInfo(coords, board.getTileOwner(coords));
+                change.changedTokens.add(tile);
+            }
+        }
+        return change;
+    }
+
     public ArrayList<Coords> getPlayableTiles() {
         return this.playableTiles;
     }
-
 
     public void initTokens() {
         int size = board.getSize();
