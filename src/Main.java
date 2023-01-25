@@ -8,7 +8,7 @@ public class Main {
         
     	ReversiModel theModel = new ReversiModel();
         
-        ReversiController theController = new ReversiController(theView, theModel);
+        ReversiController theController = new ReversiController(theModel, theView);
         
         theView.setVisible(true);
     }

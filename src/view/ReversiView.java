@@ -1,5 +1,7 @@
 package view;
 
-public class ReversiView {
+import javax.swing.*;
+
+public class ReversiView extends JFrame implements ReversiViewInterface {
     
 }

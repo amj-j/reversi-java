@@ -1,4 +1,6 @@
-package model.enums;
+package model;
+
+import graphic_info.Coords;
 
 public enum Neighbours {
     UP(0, 1),
@@ -24,5 +26,9 @@ public enum Neighbours {
 
     public int getY() {
         return y;
+    }
+
+    public Coords getXY() {
+        return new Coords(this.x, this.y);
     }
 }
