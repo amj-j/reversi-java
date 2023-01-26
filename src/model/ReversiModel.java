@@ -7,8 +7,6 @@ import utils.Defaults;
 
 public class ReversiModel implements ReversiModelInterface {
     private Board board = new Board(Defaults.BOARD_SIZE);
-    private BoardChange boardChange;
-    private ArrayList<Coords> playableTiles = new ArrayList<Coords>();
     private boolean singleplayer = false;
     private Owner currPlayer;
     private Owner otherPlayer;
@@ -29,8 +27,8 @@ public class ReversiModel implements ReversiModelInterface {
         otherPlayer = tmp;
     }
 
-    public void setPlayableTiles() {
-        this.playableTiles = new ArrayList<Coords>();
+    public ArrayList<Coords> getPlayableTiles() {
+        ArrayList<Coords> playableTiles = new ArrayList<Coords>();
         Coords coords = new Coords(0,0);
         for (int x = 0; x < board.getSize(); ++x) {
             coords.x = x;
@@ -41,22 +39,21 @@ public class ReversiModel implements ReversiModelInterface {
                 }
                 for (Neighbours neighbour : Neighbours.values()) {
                     ArrayList<Coords> line = getLine(neighbour, otherPlayer, coords);
-                    if (line == null) {
+                    if (line == null || line.size() == 0) {
                         continue;
                     }
-                    if (line.size() > 0) {
-                        Coords playable = new Coords(line.get(line.size() - 1));
-                        playable.moveBy(neighbour.getXY());
-                        if (board.getTileOwner(playable) == Owner.NONE) {
-                            this.playableTiles.add(playable);
-                        }
+                    Coords endOfLine = new Coords(line.get(line.size() - 1));
+                    endOfLine.moveBy(neighbour.getXY());
+                    if (board.getTileOwner(endOfLine) == Owner.NONE) {
+                        playableTiles.add(endOfLine);
                     }
                 }
             }
         }
+        return playableTiles;
     }
 
-    public boolean canPlay(Coords coords) {
+    public boolean canPlay(Coords coords, ArrayList<Coords> playableTiles) {
         for (Coords i : playableTiles) {
             if (coords.x == i.x && coords.y == i.y) {
                 return true;
@@ -69,24 +66,63 @@ public class ReversiModel implements ReversiModelInterface {
         return this.singleplayer;
     }
 
-    public BoardChange getBoardChange() {
-        return this.boardChange;
-    }
-
     public BoardChange getBoardStatus() {
-        BoardChange change = new BoardChange(null, board.getPlayer1TokenCount(), board.getPlayer2TokenCount());
+        BoardChange status = new BoardChange(null, board.getTokenCounts());
         for (int x = 0; x < board.getSize(); ++x) {
             for (int y = 0; y < board.getSize(); ++y) {
                 Coords coords = new Coords(x,y);
                 TileInfo tile = new TileInfo(coords, board.getTileOwner(coords));
-                change.changedTokens.add(tile);
+                status.changedTokens.add(tile);
             }
         }
-        return change;
+        return status;
     }
 
-    public ArrayList<Coords> getPlayableTiles() {
-        return this.playableTiles;
+    public BoardChange play(Coords coords) {
+        BoardChange currChange = new BoardChange();
+        board.setTileOwner(currPlayer, coords);
+        currChange.addedToken = new TileInfo(coords, currPlayer);
+        for (Neighbours neighbour : Neighbours.values()) {
+            ArrayList<Coords> line = getLine(neighbour, otherPlayer, coords);
+            if (line == null || line.size() == 0) {
+                continue;
+            }
+            Coords endOfLine = new Coords(line.get(line.size() - 1));
+            endOfLine.moveBy(neighbour.getXY());
+            if (board.getTileOwner(endOfLine) == currPlayer) {
+                for (Coords it : line) {
+                    board.setTileOwner(currPlayer, it);
+                    currChange.changedTokens.add(new TileInfo(new Coords(it), currPlayer));
+                }
+            }
+        }
+        currChange.tokenCounts = board.getTokenCounts();
+        return currChange;
+    }
+
+    public Coords calcBestMove() {
+        ArrayList<Coords> playableTiles = getPlayableTiles();
+        int maxTurnedTiles = 0;
+        Coords bestTile = null;
+        for (Coords tile : playableTiles) {
+            int turnedTiles = 0;
+            for (Neighbours neighbour : Neighbours.values()) {
+                ArrayList<Coords> line = getLine(neighbour, otherPlayer, tile);
+                if (line == null || line.size() == 0) {
+                    continue;
+                }
+                Coords endOfLine = new Coords(line.get(line.size() - 1));
+                endOfLine.moveBy(neighbour.getXY());
+                if (board.getTileOwner(endOfLine) == currPlayer) {
+                    turnedTiles += line.size();
+                }
+            }
+            if (turnedTiles > maxTurnedTiles) {
+                maxTurnedTiles = turnedTiles;
+                bestTile = tile;
+            }
+        }
+        return bestTile;
     }
 
     public void initTokens() {
@@ -113,5 +149,17 @@ public class ReversiModel implements ReversiModelInterface {
             return null;
         }
         return line;
+    }
+
+    public boolean isBoardFull() {
+        int p1TokenCount = board.getTokenCount(Owner.PLAYER_1);
+        int p2TokenCount = board.getTokenCount(Owner.PLAYER_2);
+        int boardSize = board.getSize();
+        if (p1TokenCount + p2TokenCount >= boardSize) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

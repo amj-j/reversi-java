@@ -1,17 +1,17 @@
 package graphic_info;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 
 public class BoardChange {
-    public ArrayList<TileInfo> changedTokens;
-    public final TileInfo addedToken;
-    public final int player1TokenCount;
-    public final int player2TokenCount;
+    public ArrayList<TileInfo> changedTokens = new ArrayList<TileInfo>();;
+    public TileInfo addedToken;
+    public EnumMap<Owner, Integer> tokenCounts = new EnumMap<>(Owner.class);
 
-    public BoardChange(TileInfo addedToken, int player1TokenCount, int player2TokenCount) {
-        this.changedTokens = new ArrayList<TileInfo>();
+    public BoardChange() {}
+
+    public BoardChange(TileInfo addedToken, EnumMap<Owner, Integer> tokenCounts) {
         this.addedToken = addedToken;
-        this.player1TokenCount = player1TokenCount;
-        this.player2TokenCount = player2TokenCount;
+        this.tokenCounts = tokenCounts;
     }
 }

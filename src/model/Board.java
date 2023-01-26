@@ -1,15 +1,15 @@
 package model;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 
-import graphic_info.Coords;
-import graphic_info.Owner;
+import graphic_info.*;
+
 
 public class Board {
     private Owner[][] tiles;
     private final int size;
-    private int player1TokenCount;
-    private int player2TokenCount;
+    private EnumMap<Owner, Integer> tokenCounts = new EnumMap<>(Owner.class);
     
     protected Board(int boardSize) {
         tiles = new Owner[boardSize][boardSize];
@@ -17,6 +17,8 @@ public class Board {
         for (int i = 0; i < boardSize; i++) {
             Arrays.fill(tiles[i], Owner.NONE);
         }
+        tokenCounts.put(Owner.PLAYER_1, 0);
+        tokenCounts.put(Owner.PLAYER_2, 0);
     }
 
     protected Owner getTileOwner(Coords coords) {
@@ -32,15 +34,22 @@ public class Board {
         return this.size;
     }
 
-    protected void setTileOwner(Owner owner, Coords coords) {
-        tiles[coords.x][coords.y] = owner;
+    protected void setTileOwner(Owner newOwner, Coords coords) {
+        Owner prevOwner = getTileOwner(coords);
+        if (prevOwner != newOwner) {
+            tiles[coords.x][coords.y] = newOwner;
+            tokenCounts.put(newOwner, tokenCounts.get(newOwner)+1);
+            if (prevOwner != Owner.NONE) {
+                tokenCounts.put(newOwner, tokenCounts.get(newOwner)-1);
+            }
+        }
     }
 
-    public int getPlayer1TokenCount() {
-        return this.player1TokenCount;
+    public int getTokenCount(Owner player) {
+        return this.tokenCounts.get(player);
     }
 
-    public int getPlayer2TokenCount() {
-        return this.player2TokenCount;
+    public EnumMap<Owner, Integer> getTokenCounts() {
+        return new EnumMap<Owner, Integer>(tokenCounts);
     }
 }
