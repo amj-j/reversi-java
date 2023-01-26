@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import java.awt.event.*;
 
 import graphic_info.*;
@@ -18,23 +20,7 @@ public class ReversiController implements ReversiControllerInterface {
     }
 
     public void tileClicked(Coords coords) {
-        if (!theModel.canPlay(coords)) {
-            return;
-        }
-        theModel.play(coords);
-        theModel.toggleCurrPlayer();
-        BoardChange change = theModel.getBoardChange();
-        theView.updateBoard(change);
-        if (theModel.isSingleplayer()) {
-            //wait 3 seconds
-            theModel.playOpponent();
-            theModel.toggleCurrPlayer();
-            change = theModel.getBoardChange();
-            theView.updateBoard(change);
-        }
-        if (theModel.isGameOver()) {
-            gameOver(change);
-        }
+        
     }
 
     private void gameOver(BoardChange change) {

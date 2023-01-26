@@ -29,19 +29,19 @@ public class ReversiModel implements ReversiModelInterface {
 
     public ArrayList<Coords> getPlayableTiles() {
         ArrayList<Coords> playableTiles = new ArrayList<Coords>();
-        Coords coords = new Coords(0,0);
+        Coords tile = new Coords(0,0);
         for (int x = 0; x < board.getSize(); ++x) {
-            coords.x = x;
+            tile.x = x;
             for (int y = 0; y < board.getSize(); ++y) {
-                coords.y = y;
-                if (board.getTileOwner(coords) != currPlayer) {
+                tile.y = y;
+                if (board.getTileOwner(tile) != currPlayer) {
                     continue;
                 }
                 for (Neighbours neighbour : Neighbours.values()) {
-                    ArrayList<Coords> line = getLine(neighbour, otherPlayer, coords);
-                    if (line == null || line.size() == 0) {
+                    ArrayList<Coords> line = getLine(neighbour, otherPlayer, tile);
+                    if (line == null) {
                         continue;
-                    }
+                    }                    
                     Coords endOfLine = new Coords(line.get(line.size() - 1));
                     endOfLine.moveBy(neighbour.getXY());
                     if (board.getTileOwner(endOfLine) == Owner.NONE) {
@@ -78,13 +78,13 @@ public class ReversiModel implements ReversiModelInterface {
         return status;
     }
 
-    public BoardChange play(Coords coords) {
+    public BoardChange play(Coords tile) {
         BoardChange currChange = new BoardChange();
-        board.setTileOwner(currPlayer, coords);
-        currChange.addedToken = new TileInfo(coords, currPlayer);
+        board.setTileOwner(currPlayer, tile);
+        currChange.addedToken = new TileInfo(tile, currPlayer);
         for (Neighbours neighbour : Neighbours.values()) {
-            ArrayList<Coords> line = getLine(neighbour, otherPlayer, coords);
-            if (line == null || line.size() == 0) {
+            ArrayList<Coords> line = getLine(neighbour, otherPlayer, tile);
+            if (line == null) {
                 continue;
             }
             Coords endOfLine = new Coords(line.get(line.size() - 1));
@@ -108,7 +108,7 @@ public class ReversiModel implements ReversiModelInterface {
             int turnedTiles = 0;
             for (Neighbours neighbour : Neighbours.values()) {
                 ArrayList<Coords> line = getLine(neighbour, otherPlayer, tile);
-                if (line == null || line.size() == 0) {
+                if (line == null) {
                     continue;
                 }
                 Coords endOfLine = new Coords(line.get(line.size() - 1));
@@ -140,12 +140,15 @@ public class ReversiModel implements ReversiModelInterface {
     private ArrayList<Coords> getLine(Neighbours direction, Owner lineOwner, Coords start) {
         Coords curr = new Coords(start);
         curr.moveBy(direction.getXY());
+        if (board.getTileOwner(curr) != lineOwner) {
+            return null;
+        }
         ArrayList<Coords> line = new ArrayList<Coords>();
         while (board.getTileOwner(curr) == lineOwner) {
             line.add(new Coords(curr));
             curr.moveBy(direction.getXY());
         }
-        if (board.getTileOwner(curr) == null) {
+        if (board.getTileOwner(curr) == null ) {
             return null;
         }
         return line;
