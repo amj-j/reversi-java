@@ -3,12 +3,11 @@ package model.game;
 import java.util.ArrayList;
 
 import interfaces.BoardEventListener;
-import utils.Defaults;
 import model.*;
 import structures.*;
 
 public abstract class Game {
-    private Board board = new Board(Defaults.BOARD_SIZE);
+    private Board board = new Board(DefaultSettings.BOARD_SIZE);
     protected ArrayList<Coords> playableTiles = new ArrayList<>();
     ArrayList<BoardEventListener> listeners = new ArrayList<>();
 
@@ -63,7 +62,7 @@ public abstract class Game {
         board.setTileOwner(Owner.PLAYER_1, tokenCoords);
         tokenCoords.x += 1;
         board.setTileOwner(Owner.PLAYER_2, tokenCoords);
-        setPlayableTiles(Defaults.STARTING_PLAYER);
+        setPlayableTiles(DefaultSettings.STARTING_PLAYER);
     }
 
     public BoardChange getBoardStatus() {

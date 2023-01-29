@@ -1,11 +1,11 @@
 package model.game;
 
-import utils.Defaults;
 import structures.*;
 import model.GameOverException;
+import model.DefaultSettings;
 
 public class Singleplayer extends Game {
-    Owner bot = Defaults.BOT;
+    Owner bot = DefaultSettings.BOT;
     Owner player = bot.opponent();
 
     public Singleplayer(int boardSize) {
