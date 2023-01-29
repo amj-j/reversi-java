@@ -1,4 +1,4 @@
-package graphic_info;
+package structures;
 
 import java.util.ArrayList;
 import java.util.EnumMap;

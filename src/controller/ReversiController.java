@@ -2,10 +2,12 @@ package controller;
 
 import java.util.ArrayList;
 
+import interfaces.ReversiControllerInterface;
+
 import java.awt.event.*;
 
-import graphic_info.*;
 import model.ReversiModel;
+import structures.*;
 import view.ReversiView;
 
 public class ReversiController implements ReversiControllerInterface {

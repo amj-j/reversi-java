@@ -1,4 +1,4 @@
-package graphic_info;
+package structures;
 
 public class TileInfo {
     public Coords coords;

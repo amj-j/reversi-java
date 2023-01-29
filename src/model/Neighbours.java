@@ -1,6 +1,6 @@
 package model;
 
-import graphic_info.Coords;
+import structures.Coords;
 
 public enum Neighbours {
     UP(0, 1),

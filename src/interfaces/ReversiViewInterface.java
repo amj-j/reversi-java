@@ -1,6 +1,6 @@
-package view;
+package interfaces;
 
-import graphic_info.BoardChange;
+import structures.BoardChange;
 
 public interface ReversiViewInterface {
     public void updateBoard(BoardChange change);

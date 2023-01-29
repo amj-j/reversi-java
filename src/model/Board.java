@@ -3,7 +3,7 @@ package model;
 import java.util.Arrays;
 import java.util.EnumMap;
 
-import graphic_info.*;
+import structures.*;
 
 
 public class Board {
@@ -11,7 +11,7 @@ public class Board {
     private final int size;
     private EnumMap<Owner, Integer> tokenCounts = new EnumMap<>(Owner.class);
     
-    protected Board(int boardSize) {
+    public Board(int boardSize) {
         tiles = new Owner[boardSize][boardSize];
         this.size = boardSize;
         for (int i = 0; i < boardSize; i++) {
@@ -21,7 +21,7 @@ public class Board {
         tokenCounts.put(Owner.PLAYER_2, 0);
     }
 
-    protected Owner getTileOwner(Coords coords) {
+    public Owner getTileOwner(Coords coords) {
         try {
             return tiles[coords.x][coords.y];
         }
@@ -30,11 +30,11 @@ public class Board {
         } 
     }
 
-    protected int getSize() {
+    public int getSize() {
         return this.size;
     }
 
-    protected void setTileOwner(Owner newOwner, Coords coords) {
+    public void setTileOwner(Owner newOwner, Coords coords) {
         Owner prevOwner = getTileOwner(coords);
         if (prevOwner != newOwner) {
             tiles[coords.x][coords.y] = newOwner;

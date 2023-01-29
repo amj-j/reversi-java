@@ -1,9 +1,13 @@
 package utils;
 
+import structures.Owner;
+
 public class Defaults {
     //Model:
     public static final int BOARD_SIZE = 8;
     public static final boolean SINGLEPLAYER = true;
+    public static final Owner STARTING_PLAYER = Owner.PLAYER_1;
+    public static final Owner BOT = Owner.PLAYER_2;
 
     //View:
     public static final String PLAYER1_NAME = "Player1";
