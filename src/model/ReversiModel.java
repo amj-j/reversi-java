@@ -1,7 +1,7 @@
 package model;
 
 import structures.*;
-import interfaces.BoardEventListener;
+import interfaces.ReversiModelListener;
 import interfaces.ReversiModelInterface;
 import model.game.*;
 
@@ -21,7 +21,7 @@ public class ReversiModel implements ReversiModelInterface {
         }
     }
 
-    public void addListener(BoardEventListener listener) {
+    public void addListener(ReversiModelListener listener) {
         game.addListener(listener);
     }
 

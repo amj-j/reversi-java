@@ -2,14 +2,14 @@ package model.game;
 
 import java.util.ArrayList;
 
-import interfaces.BoardEventListener;
+import interfaces.ReversiModelListener;
 import model.*;
 import structures.*;
 
 public abstract class Game {
     private Board board = new Board(DefaultSettings.BOARD_SIZE);
     protected ArrayList<Coords> playableTiles = new ArrayList<>();
-    ArrayList<BoardEventListener> listeners = new ArrayList<>();
+    ArrayList<ReversiModelListener> listeners = new ArrayList<>();
 
     public Game() {}
 
@@ -17,30 +17,30 @@ public abstract class Game {
         this.board = new Board(boardSize);
     }
 
-    public void addListener(BoardEventListener listener) {
+    public void addListener(ReversiModelListener listener) {
         this.listeners.add(listener);
     }
 
     public void sendBoardChange(BoardChange change) {
-        for (BoardEventListener listener : listeners) {
+        for (ReversiModelListener listener : listeners) {
             listener.updateBoard(change);
         }
     }
 
     public void sendPlayableTiles() {
-        for (BoardEventListener listener : listeners) {
+        for (ReversiModelListener listener : listeners) {
             listener.newPlayableTiles(playableTiles);
         }
     }
 
     public void sendPassMove(Owner player) {
-        for (BoardEventListener listener : listeners) {
+        for (ReversiModelListener listener : listeners) {
             listener.passMove(player);
         }
     }
 
     public void sendGameOver(Owner winner) throws GameOverException {
-        for (BoardEventListener listener : listeners) {
+        for (ReversiModelListener listener : listeners) {
             listener.gameOver(winner);
         }
         throw new GameOverException();
