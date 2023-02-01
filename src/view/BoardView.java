@@ -23,7 +23,7 @@ public class BoardView extends JPanel {
     private void initTiles() {
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
-                tiles[x][y] = new TileView();
+                tiles[x][y] = new TileView(new Coords(x, y));
                 if ((x%2 == 0 && y%2 == 0) || (x%2 == 1 && y%2 == 1)) {
                     tiles[x][y].setBackground(DefaultViewSettings.TILE_COLOR1);
                 }
@@ -36,7 +36,10 @@ public class BoardView extends JPanel {
     }
 
     public void updateTiles(BoardChange change, EnumMap<Owner, Player> players) {
-        tiles[change.addedToken.coords.x][change.addedToken.coords.y].addToken(players.get(change.addedToken.owner));
+        if (change.addedToken != null) {
+            TileView addedTokenTile = tiles[change.addedToken.coords.x][change.addedToken.coords.y];
+            addedTokenTile.addToken(players.get(change.addedToken.owner));
+        }
         for (TileInfo info : change.changedTokens) {
             tiles[info.coords.x][info.coords.y].turnToken(players.get(info.owner));
         }
@@ -52,6 +55,14 @@ public class BoardView extends JPanel {
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
                 tiles[x][y].setPlayability(false);
+            }
+        }
+    }
+
+    public void addTileClickedListeners(MouseListener listener) {
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                tiles[x][y].addMouseListener(listener);
             }
         }
     }

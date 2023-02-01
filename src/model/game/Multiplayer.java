@@ -1,13 +1,16 @@
 package model.game;
 
+import java.util.ArrayList;
+
 import structures.*;
 import model.GameOverException;
+import interfaces.ReversiModelListener;
 
 public class Multiplayer extends Game {
     Owner currPlayer;
 
-    public Multiplayer(int boardSize) {
-        super(boardSize);
+    public Multiplayer(int boardSize, ArrayList<ReversiModelListener> listeners) {
+        super(boardSize, listeners);
     }
 
     @Override

@@ -3,15 +3,14 @@ package view;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.plaf.FontUIResource;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
 
 import structures.*;
-import interfaces.ReversiModelListener;
+import interfaces.*;
 
-public class ReversiView extends JFrame implements ComponentListener, WindowStateListener, ReversiModelListener {
+public class ReversiView extends JFrame implements ComponentListener, WindowStateListener, ReversiModelListener, ReversiViewInterface {
     GameMenu menu;
     BoardView board;
     PlayerPanel topPanel;
@@ -38,6 +37,7 @@ public class ReversiView extends JFrame implements ComponentListener, WindowStat
         bottomPanel.setAlignmentX(CENTER_ALIGNMENT);
         bottomPanel.setAlignmentY(BOTTOM_ALIGNMENT);
         this.add(bottomPanel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void initMenu() {
@@ -110,6 +110,10 @@ public class ReversiView extends JFrame implements ComponentListener, WindowStat
 
     public void gameOver(Owner player) {
 
+    }
+
+    public void addTileClickedListener(MouseListener listener) {
+        board.addTileClickedListeners(listener);
     }
 
 }

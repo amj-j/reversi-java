@@ -6,11 +6,14 @@ import javax.swing.*;
 import structures.*;
 
 public class TileView extends JPanel {
+    Coords coords;
     Player owner = null;
     boolean playable = false;
     
-    public TileView() {
+    public TileView(Coords coords) {
+        this.coords = coords;
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
     }
 
     @Override
@@ -32,6 +35,10 @@ public class TileView extends JPanel {
             g.setColor(owner.getColor());
             g.fillOval(x, y, diameter, diameter);
         }
+    }
+
+    public Coords getCoords() {
+        return this.coords;
     }
 
     public void addToken(Player newOwner) {

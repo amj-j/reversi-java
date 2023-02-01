@@ -11,10 +11,10 @@ public abstract class Game {
     protected ArrayList<Coords> playableTiles = new ArrayList<>();
     ArrayList<ReversiModelListener> listeners = new ArrayList<>();
 
-    public Game() {}
-
-    public Game(int boardSize) {
+    public Game(int boardSize, ArrayList<ReversiModelListener> listeners) {
         this.board = new Board(boardSize);
+        this.listeners = listeners;
+        initGame();
     }
 
     public void addListener(ReversiModelListener listener) {
@@ -52,17 +52,25 @@ public abstract class Game {
         return board.getSize();
     }
 
-    public void initTokens() {
+    public void initGame() {
         int size = board.getSize();
+        BoardChange initChange = new BoardChange();
         Coords tokenCoords = new Coords(size/2, size/2);
         board.setTileOwner(Owner.PLAYER_1, tokenCoords);
+        initChange.changedTokens.add(new TileInfo(tokenCoords, Owner.PLAYER_1));
         tokenCoords.x -= 1;
         board.setTileOwner(Owner.PLAYER_2, tokenCoords);
+        initChange.changedTokens.add(new TileInfo(tokenCoords, Owner.PLAYER_2));
         tokenCoords.y -= 1;
         board.setTileOwner(Owner.PLAYER_1, tokenCoords);
+        initChange.changedTokens.add(new TileInfo(tokenCoords, Owner.PLAYER_1));
         tokenCoords.x += 1;
         board.setTileOwner(Owner.PLAYER_2, tokenCoords);
+        initChange.changedTokens.add(new TileInfo(tokenCoords, Owner.PLAYER_2));
         setPlayableTiles(DefaultSettings.STARTING_PLAYER);
+        initChange.tokenCounts = board.getTokenCounts();
+        sendBoardChange(initChange);
+        sendPlayableTiles();
     }
 
     public BoardChange getBoardStatus() {

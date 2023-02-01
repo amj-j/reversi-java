@@ -1,15 +1,18 @@
 package model.game;
 
+import java.util.ArrayList;
+
 import structures.*;
 import model.GameOverException;
 import model.DefaultSettings;
+import interfaces.ReversiModelListener;
 
 public class Singleplayer extends Game {
     Owner bot = DefaultSettings.BOT;
     Owner player = bot.opponent();
 
-    public Singleplayer(int boardSize) {
-        super(boardSize);
+    public Singleplayer(int boardSize, ArrayList<ReversiModelListener> listeners) {
+        super(boardSize, listeners);
     }
     
     @Override

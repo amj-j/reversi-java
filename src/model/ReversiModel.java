@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import structures.*;
 import interfaces.ReversiModelListener;
 import interfaces.ReversiModelInterface;
@@ -7,25 +9,36 @@ import model.game.*;
 
 public class ReversiModel implements ReversiModelInterface {
     private Game game;
+    ArrayList<ReversiModelListener> listeners = new ArrayList<>();
 
-    public ReversiModel() {
-        newGame(DefaultSettings.BOARD_SIZE, DefaultSettings.SINGLEPLAYER);
+    public void newGame() {
+        int boardSize = DefaultSettings.BOARD_SIZE;
+        boolean singleplayer = DefaultSettings.SINGLEPLAYER;
+        if (singleplayer) {
+            this.game = new Singleplayer(boardSize, listeners);
+        }
+        else {
+            this.game = new Multiplayer(boardSize, listeners);
+        }
     }
 
     public void newGame(int boardSize, boolean singleplayer) {
         if (singleplayer) {
-            this.game = new Singleplayer(boardSize);
+            this.game = new Singleplayer(boardSize, listeners);
         }
         else {
-            this.game = new Multiplayer(boardSize);
+            this.game = new Multiplayer(boardSize, listeners);
         }
     }
 
     public void addListener(ReversiModelListener listener) {
-        game.addListener(listener);
+        listeners.add(listener);
     }
 
     public int getBoardSize() {
+        if (game == null) {
+            return DefaultSettings.BOARD_SIZE;
+        }
         return game.getBoardSize();
     }
 
