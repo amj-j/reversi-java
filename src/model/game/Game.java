@@ -22,16 +22,12 @@ public abstract class Game {
     }
 
     public void sendBoardChange(BoardChange change) {
-        board.printTiles();
         for (ReversiModelListener listener : listeners) {
             listener.updateBoard(change);
         }
     }
 
     public void sendPlayableTiles() {
-        for (Coords coords : playableTiles) {
-            System.out.println(coords.x + ", " + coords.y);
-        }
         for (ReversiModelListener listener : listeners) {
             listener.newPlayableTiles(playableTiles);
         }

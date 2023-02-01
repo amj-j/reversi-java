@@ -22,7 +22,6 @@ public class TileClicked extends MouseAdapter {
             board = (BoardView) click.getComponent();
             tile = (TileView) board.getComponentAt(click.getPoint());
         } catch(Exception e) { 
-            System.out.println("ERROR");
             return; 
         }
         theModel.playTurn(tile.getCoords());
