@@ -44,21 +44,21 @@ public class TileView extends JPanel {
     public void addToken(Player newOwner) {
         this.owner = newOwner;
         repaint();
-        try {
+        /*try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void turnToken(Player newOwner) {
         this.owner = newOwner;
         repaint();
-        try {
+        /*try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void setPlayability(boolean playable) {

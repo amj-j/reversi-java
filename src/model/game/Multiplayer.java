@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import structures.*;
 import model.GameOverException;
 import interfaces.ReversiModelListener;
+import model.DefaultSettings;
 
 public class Multiplayer extends Game {
-    Owner currPlayer;
+    Owner currPlayer = DefaultSettings.STARTING_PLAYER;
 
     public Multiplayer(int boardSize, ArrayList<ReversiModelListener> listeners) {
         super(boardSize, listeners);
@@ -18,6 +19,7 @@ public class Multiplayer extends Game {
         if (!canPlay(chosenTile)) {
             return;
         }
+        sendRemovePlayableTiles();
         BoardChange boardChange = play(currPlayer, chosenTile);
         sendBoardChange(boardChange);
         if (isBoardFull()) {

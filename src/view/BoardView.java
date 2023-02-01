@@ -51,19 +51,9 @@ public class BoardView extends JPanel {
         }
     }
 
-    public void removePlayableTiles() {
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
-                tiles[x][y].setPlayability(false);
-            }
-        }
-    }
-
-    public void addTileClickedListeners(MouseListener listener) {
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
-                tiles[x][y].addMouseListener(listener);
-            }
+    public void removePlayableTiles(ArrayList<Coords> playableTiles) {
+        for (Coords coords : playableTiles) {
+            tiles[coords.x][coords.y].setPlayability(false);
         }
     }
 }

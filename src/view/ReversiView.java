@@ -83,6 +83,11 @@ public class ReversiView extends JFrame implements ComponentListener, WindowStat
         board.repaint();
     }
 
+    public void removePlayableTiles(ArrayList<Coords> playableTiles) {
+        board.removePlayableTiles(playableTiles);
+        board.repaint();
+    }
+
     public void passMove(Owner player) {
         String playerName = players.get(player).getName();
         JWindow popup = new JWindow(this);
@@ -113,7 +118,7 @@ public class ReversiView extends JFrame implements ComponentListener, WindowStat
     }
 
     public void addTileClickedListener(MouseListener listener) {
-        board.addTileClickedListeners(listener);
+        board.addMouseListener(listener);
     }
 
 }

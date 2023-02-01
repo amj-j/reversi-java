@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.*;
 
+import view.BoardView;
 import view.TileView;
 import model.ReversiModel;
 
@@ -14,10 +15,16 @@ public class TileClicked extends MouseAdapter {
 
     @Override
     public void mouseClicked(MouseEvent click) {
+        BoardView board;
         TileView tile;
+        System.out.println("KLIK");
         try {
-            tile = (TileView) click.getComponent();
-        } catch(Exception e) { return; }
+            board = (BoardView) click.getComponent();
+            tile = (TileView) board.getComponentAt(click.getPoint());
+        } catch(Exception e) { 
+            System.out.println("ERROR");
+            return; 
+        }
         theModel.playTurn(tile.getCoords());
     }
 }

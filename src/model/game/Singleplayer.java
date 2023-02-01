@@ -20,6 +20,7 @@ public class Singleplayer extends Game {
         if (!canPlay(chosenTile)) {
             return;
         }
+        sendRemovePlayableTiles();
         BoardChange boardChange = play(player, chosenTile);
         sendBoardChange(boardChange);
         if (isBoardFull()) {

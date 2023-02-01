@@ -52,4 +52,14 @@ public class Board {
     public EnumMap<Owner, Integer> getTokenCounts() {
         return new EnumMap<Owner, Integer>(tokenCounts);
     }
+
+    public void printTiles() {
+        for (int x = 0; x < getSize(); ++x) {
+            for (int y = 0; y < getSize(); ++y) {
+                System.out.print(tiles[x][y] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
 }

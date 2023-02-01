@@ -22,14 +22,24 @@ public abstract class Game {
     }
 
     public void sendBoardChange(BoardChange change) {
+        board.printTiles();
         for (ReversiModelListener listener : listeners) {
             listener.updateBoard(change);
         }
     }
 
     public void sendPlayableTiles() {
+        for (Coords coords : playableTiles) {
+            System.out.println(coords.x + ", " + coords.y);
+        }
         for (ReversiModelListener listener : listeners) {
             listener.newPlayableTiles(playableTiles);
+        }
+    }
+
+    public void sendRemovePlayableTiles() {
+        for (ReversiModelListener listener : listeners) {
+            listener.removePlayableTiles(playableTiles);
         }
     }
 
@@ -57,16 +67,16 @@ public abstract class Game {
         BoardChange initChange = new BoardChange();
         Coords tokenCoords = new Coords(size/2, size/2);
         board.setTileOwner(Owner.PLAYER_1, tokenCoords);
-        initChange.changedTokens.add(new TileInfo(tokenCoords, Owner.PLAYER_1));
+        initChange.changedTokens.add(new TileInfo(new Coords(tokenCoords), Owner.PLAYER_1));
         tokenCoords.x -= 1;
         board.setTileOwner(Owner.PLAYER_2, tokenCoords);
-        initChange.changedTokens.add(new TileInfo(tokenCoords, Owner.PLAYER_2));
+        initChange.changedTokens.add(new TileInfo(new Coords(tokenCoords), Owner.PLAYER_2));
         tokenCoords.y -= 1;
         board.setTileOwner(Owner.PLAYER_1, tokenCoords);
-        initChange.changedTokens.add(new TileInfo(tokenCoords, Owner.PLAYER_1));
+        initChange.changedTokens.add(new TileInfo(new Coords(tokenCoords), Owner.PLAYER_1));
         tokenCoords.x += 1;
         board.setTileOwner(Owner.PLAYER_2, tokenCoords);
-        initChange.changedTokens.add(new TileInfo(tokenCoords, Owner.PLAYER_2));
+        initChange.changedTokens.add(new TileInfo(new Coords(tokenCoords), Owner.PLAYER_2));
         setPlayableTiles(DefaultSettings.STARTING_PLAYER);
         initChange.tokenCounts = board.getTokenCounts();
         sendBoardChange(initChange);
@@ -186,7 +196,7 @@ public abstract class Game {
         int p1 = board.getTokenCount(Owner.PLAYER_1);
         int p2 = board.getTokenCount(Owner.PLAYER_2);
         int boardSize = board.getSize();
-        if (p1 + p2 >= boardSize) {
+        if (p1 + p2 >= boardSize*boardSize) {
             return true;
         }
         else {
