@@ -15,7 +15,7 @@ public class Player {
         this.player = player;
         this.name = name;
         this.color = color;
-        this.tokenCount = tokenCount;
+        this.tokenCount = 0;
     }
 
     public void setName(String name) {

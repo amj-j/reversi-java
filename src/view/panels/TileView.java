@@ -1,9 +1,11 @@
-package view;
+package view.panels;
 
 import java.awt.*;
 import javax.swing.*;
 
 import structures.*;
+import view.DefaultViewSettings;
+import view.Player;
 
 public class TileView extends JPanel {
     Coords coords;

@@ -10,11 +10,12 @@ public class ReversiController implements ReversiControllerInterface {
     private ReversiModel theModel;
     private ReversiView theView;
     
-    public ReversiController(ReversiModel theModel, ReversiView theView) {
-        this.theView = theView;
-		this.theModel = theModel;
+    public ReversiController() {
+        this.theModel = new ReversiModel();
+        this.theView = new ReversiView(theModel.getBoardSize());
         theModel.addListener(theView);
         theView.addTileClickedListener(new TileClicked(theModel));
         theModel.newGame();
+        theView.setVisible(true);
     }
 }

@@ -1,4 +1,4 @@
-package view;
+package view.panels;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,16 +7,24 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 
 import structures.*;
+import view.DefaultViewSettings;
+import view.Player;
 
 public class BoardView extends JPanel {
     TileView[][] tiles;
-    private final int size;
+    private int size;
 
     public BoardView(int boardSize, Container parent) {
         this.size = boardSize;
         tiles = new TileView[size][size];
         setBackground(DefaultViewSettings.BG_COLOR);
         setLayout(new GridLayout(size, size));
+        initTiles();
+    }
+
+    public void newBoard(int size) {
+        this.size = size;
+        removeAll();
         initTiles();
     }
 

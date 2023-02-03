@@ -2,8 +2,8 @@ package controller;
 
 import java.awt.event.*;
 
-import view.BoardView;
-import view.TileView;
+import view.panels.BoardView;
+import view.panels.TileView;
 import model.ReversiModel;
 
 public class TileClicked extends MouseAdapter {

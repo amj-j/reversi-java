@@ -4,7 +4,8 @@ import structures.*;
 
 public interface ReversiModelInterface {
     public void newGame();
-    public void newGame(int boardSize, boolean singleplayer);
+    public void setBoardSize(int size);
+    public void setSingleplayer(boolean singleplayer);
     public void addListener(ReversiModelListener listener);
     public int getBoardSize();
     public boolean isSingleplayer();  

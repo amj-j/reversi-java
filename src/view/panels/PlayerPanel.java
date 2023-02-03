@@ -1,7 +1,10 @@
-package view;
+package view.panels;
 
 import java.awt.*;
 import javax.swing.*;
+
+import view.DefaultViewSettings;
+import view.Player;
 
 public class PlayerPanel extends JPanel {
     Player owner;
@@ -29,8 +32,8 @@ public class PlayerPanel extends JPanel {
     }
 
     private void setValues() {
-        int size = 30;
-        Font font = new Font("Arial", Font.BOLD, size);
+        int fontSize = Math.min(getHeight(), getWidth()) /3;
+        Font font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, fontSize);
         this.name.setFont(font);
         this.tokenCount.setFont(font);
         this.name.setText(owner.getName());

@@ -8,14 +8,19 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 
 import structures.*;
+import view.panels.BoardView;
+import view.panels.GameMenu;
+import view.panels.PlayerPanel;
 import interfaces.*;
+import view.dialogs.DialogWindows;
 
-public class ReversiView extends JFrame implements ComponentListener, WindowStateListener, ReversiModelListener, ReversiViewInterface {
+public class ReversiView extends JFrame implements ReversiModelListener, ReversiViewInterface, ComponentListener, WindowStateListener {
     GameMenu menu;
     BoardView board;
     PlayerPanel topPanel;
     PlayerPanel bottomPanel;
     EnumMap<Owner, Player> players = new EnumMap<>(Owner.class);
+    DialogWindows dialogs = new DialogWindows(this);
     
     public ReversiView(int boardSize) {
         setSize(DefaultViewSettings.WINDOW_WIDTH, DefaultViewSettings.WINDOW_WIDTH);
@@ -37,7 +42,12 @@ public class ReversiView extends JFrame implements ComponentListener, WindowStat
         bottomPanel.setAlignmentX(CENTER_ALIGNMENT);
         bottomPanel.setAlignmentY(BOTTOM_ALIGNMENT);
         this.add(bottomPanel);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void newGame(int boardSize) {
+        board.newBoard(boardSize);
     }
 
     public void initMenu() {
@@ -52,10 +62,10 @@ public class ReversiView extends JFrame implements ComponentListener, WindowStat
         this.add(board);
         addComponentListener(this);
         addWindowStateListener(this);
-        setBoardSize();
+        setBoardPanelSize();
     }
 
-    private void setBoardSize() {
+    private void setBoardPanelSize() {
         int size = Math.min(this.getWidth(), this.getHeight());
         size /= 3;
         size *= 2;
@@ -63,8 +73,8 @@ public class ReversiView extends JFrame implements ComponentListener, WindowStat
         board.setMaximumSize(new Dimension(size, size));
     }
 
-    public void componentResized(ComponentEvent e) { setBoardSize(); }
-    public void windowStateChanged(WindowEvent e) { setBoardSize(); }
+    public void componentResized(ComponentEvent e) { setBoardPanelSize(); }
+    public void windowStateChanged(WindowEvent e) { setBoardPanelSize(); }
 
     public void componentMoved(ComponentEvent e) {}
     public void componentShown(ComponentEvent e) {}
@@ -96,7 +106,7 @@ public class ReversiView extends JFrame implements ComponentListener, WindowStat
         popup.setSize(8*size, size);
         popup.setBackground(new Color(0, 0, 0, 0));
         JLabel writing = new JLabel(playerName + " passes");
-        Font font = new Font("Arial", Font.BOLD, 20);
+        Font font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, popup.getWidth());
         writing.setFont(font);
         writing.setHorizontalAlignment(SwingConstants.CENTER);
         popup.add(writing);    
@@ -114,7 +124,8 @@ public class ReversiView extends JFrame implements ComponentListener, WindowStat
     }
 
     public void gameOver(Owner player) {
-
+        String playerName = players.get(player).getName();
+        dialogs.gameOver.open(playerName);
     }
 
     public void addTileClickedListener(MouseListener listener) {

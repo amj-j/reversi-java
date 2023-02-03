@@ -9,11 +9,12 @@ import model.game.*;
 
 public class ReversiModel implements ReversiModelInterface {
     private Game game;
+    private int boardSize = DefaultSettings.BOARD_SIZE;
+    private boolean singleplayer = DefaultSettings.SINGLEPLAYER;;
     ArrayList<ReversiModelListener> listeners = new ArrayList<>();
 
     public void newGame() {
-        int boardSize = DefaultSettings.BOARD_SIZE;
-        boolean singleplayer = DefaultSettings.SINGLEPLAYER;
+        sendNewGame();
         if (singleplayer) {
             this.game = new Singleplayer(boardSize, listeners);
         }
@@ -22,12 +23,9 @@ public class ReversiModel implements ReversiModelInterface {
         }
     }
 
-    public void newGame(int boardSize, boolean singleplayer) {
-        if (singleplayer) {
-            this.game = new Singleplayer(boardSize, listeners);
-        }
-        else {
-            this.game = new Multiplayer(boardSize, listeners);
+    public void sendNewGame() {
+        for (ReversiModelListener listener : listeners) {
+            listener.newGame(boardSize);
         }
     }
 
@@ -35,20 +33,22 @@ public class ReversiModel implements ReversiModelInterface {
         listeners.add(listener);
     }
 
+    public void setBoardSize(int size) {
+        this.boardSize = size;
+        newGame();
+    }
+
+    public void setSingleplayer(boolean singleplayer) {
+        this.singleplayer = singleplayer;
+        newGame();
+    }
+
     public int getBoardSize() {
-        if (game == null) {
-            return DefaultSettings.BOARD_SIZE;
-        }
-        return game.getBoardSize();
+        return this.boardSize;
     }
 
     public boolean isSingleplayer() {
-        if (game instanceof Singleplayer) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return this.singleplayer;
     }
 
     public BoardChange getBoardStatus() {

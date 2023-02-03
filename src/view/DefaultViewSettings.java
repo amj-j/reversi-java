@@ -9,6 +9,7 @@ public class DefaultViewSettings {
     public static final boolean HIGHLIGHT_MOVES = true;
     public static final int WINDOW_HEIGHT = 500;
     public static final int WINDOW_WIDTH = 500;
+    public static final String FONT_NAME = "Arial";
 
     //Colors:
     public static final Color PLAYER1_COLOR = new Color(255, 255, 255);
