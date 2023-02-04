@@ -1,4 +1,4 @@
-package view.panels.game_menu;
+package view.panels;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import interfaces.*;
 import view.dialogs.settings_window.SettingsWindow;
+import view.input_components.NewGameButton;
 
 public class GameMenu extends JPanel {
     NewGameButton newGameButton;

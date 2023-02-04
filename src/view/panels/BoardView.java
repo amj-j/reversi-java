@@ -8,17 +8,21 @@ import java.util.EnumMap;
 
 import structures.*;
 import view.DefaultViewSettings;
+import interfaces.TileClickedListener;
 
-public class BoardView extends JPanel {
+public class BoardView extends JPanel implements MouseListener {
     TileView[][] tiles;
     private int size;
     private boolean highlightMoves = DefaultViewSettings.HIGHLIGHT_MOVES;
+
+    ArrayList<TileClickedListener> listeners = new ArrayList<>();
 
     public BoardView(int boardSize, Container parent) {
         this.size = boardSize;
         tiles = new TileView[size][size];
         setBackground(DefaultViewSettings.BG_COLOR);
         setLayout(new GridLayout(size, size));
+        addMouseListener(this);
         initTiles();
     }
 
@@ -76,4 +80,27 @@ public class BoardView extends JPanel {
         this.highlightMoves = bool;
         repaint();
     }
+
+
+    public void addListener(TileClickedListener listener) {
+        listeners.add(listener);
+    }
+    
+    public void mouseClicked(MouseEvent click) {
+        TileView tile;
+        System.out.println("KLIK");
+        try {
+            tile = (TileView) getComponentAt(click.getPoint());
+        } catch(Exception e) { 
+            return; 
+        }
+        for (TileClickedListener it : listeners) {
+            it.tileClicked(tile.getCoords());
+        }
+    }
+    
+    public void mouseExited(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {}
 }

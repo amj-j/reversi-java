@@ -1,5 +1,5 @@
 package interfaces;
 
 public interface BoardSizeListener {
-    public void changeBoardSize();
+    public void changeBoardSize(int size);
 }

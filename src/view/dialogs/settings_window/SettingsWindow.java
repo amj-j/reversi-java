@@ -6,26 +6,26 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import interfaces.*;
+import view.input_components.*;
 
 public class SettingsWindow extends JDialog implements ActionListener {
 
-    PlayerNamesChanger playerNamesChanger;
+    PlayerNamesPanel playerNamesChanger;
     BoardSizeChanger boardSizeChanger;
     SingleplayerChanger singleplayerChanger;
     HighlightMovesChanger highlightMovesChanger;
 
-    JButton resetSettingsButton;
+    ResetSettingsButton resetSettingsButton;
     JButton closeButton;
     JPanel buttonPanel;
-
-    ArrayList<ResetSettingsListener> resetSettingsListeners = new ArrayList<>();
 
     public SettingsWindow(Window owner, ReversiViewInterface view) {
         super(owner);
         setLayout(new BorderLayout());
-        playerNamesChanger = new PlayerNamesChanger(view);
+        playerNamesChanger = new PlayerNamesPanel(view);
         boardSizeChanger = new BoardSizeChanger();
         singleplayerChanger = new SingleplayerChanger(view);
+        highlightMovesChanger = new HighlightMovesChanger(view);
         add(playerNamesChanger);
         add(boardSizeChanger);
         add(singleplayerChanger);
@@ -34,7 +34,7 @@ public class SettingsWindow extends JDialog implements ActionListener {
     }
 
     private void initButtons() {
-        resetSettingsButton = new JButton("Reset Settings");
+        resetSettingsButton = new ResetSettingsButton();
         closeButton = new JButton("Close");
         buttonPanel = new JPanel();
         resetSettingsButton.addActionListener(this);
@@ -45,11 +45,6 @@ public class SettingsWindow extends JDialog implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == resetSettingsButton) {
-            for (ResetSettingsListener it : resetSettingsListeners) {
-                it.resetSettings();
-            }
-        }
         setModal(false);
         setVisible(false);
     }
@@ -85,6 +80,6 @@ public class SettingsWindow extends JDialog implements ActionListener {
     }
 
     public void addResetSettingsListener(ResetSettingsListener listener) {
-        resetSettingsListeners.add(listener);
+        resetSettingsButton.addListener(listener);
     }
 }

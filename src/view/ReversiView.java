@@ -9,8 +9,8 @@ import java.util.EnumMap;
 
 import structures.*;
 import view.panels.BoardView;
+import view.panels.GameMenu;
 import view.panels.PlayerPanel;
-import view.panels.game_menu.GameMenu;
 import interfaces.*;
 import view.dialogs.GameOverWindow;
 
@@ -30,21 +30,15 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
         players.put(Owner.PLAYER_1, new Player(Owner.PLAYER_1, DefaultViewSettings.PLAYER1_NAME, DefaultViewSettings.PLAYER1_COLOR));
         players.put(Owner.PLAYER_2, new Player(Owner.PLAYER_2, DefaultViewSettings.PLAYER2_NAME, DefaultViewSettings.PLAYER2_COLOR));
         
-        this.menu = new GameMenu(this, this);
-        menu.setAlignmentX(CENTER_ALIGNMENT);
-        this.add(menu);
-        
-        this.topPanel = new PlayerPanel(players.get(Owner.PLAYER_2));
-        topPanel.setAlignmentX(CENTER_ALIGNMENT);
-        topPanel.setAlignmentY(TOP_ALIGNMENT);
-        this.add(topPanel);
-
         initBoard(boardSize);
-
-        this.bottomPanel = new PlayerPanel(players.get(Owner.PLAYER_1));
-        bottomPanel.setAlignmentX(CENTER_ALIGNMENT);
-        bottomPanel.setAlignmentY(BOTTOM_ALIGNMENT);
+        initGameMenu();
+        initPanels();
+        
+        this.add(menu);
+        this.add(topPanel);
+        this.add(board);
         this.add(bottomPanel);
+
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -57,10 +51,24 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
     public void initBoard(int boardSize) {
         this.board = new BoardView(boardSize, this);
         board.setAlignmentX(CENTER_ALIGNMENT);
-        this.add(board);
         addComponentListener(this);
         addWindowStateListener(this);
         setBoardPanelSize();
+    }
+
+    private void initGameMenu() {
+        this.menu = new GameMenu(this, this);
+        menu.setAlignmentX(CENTER_ALIGNMENT);
+    }
+
+    private void initPanels() {
+        this.topPanel = new PlayerPanel(players.get(Owner.PLAYER_2));
+        topPanel.setAlignmentX(CENTER_ALIGNMENT);
+        topPanel.setAlignmentY(TOP_ALIGNMENT);
+
+        this.bottomPanel = new PlayerPanel(players.get(Owner.PLAYER_1));
+        bottomPanel.setAlignmentX(CENTER_ALIGNMENT);
+        bottomPanel.setAlignmentY(BOTTOM_ALIGNMENT);
     }
 
     private void setBoardPanelSize() {
@@ -144,8 +152,8 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
 
 
 
-    public void addTileClickedListener(MouseListener listener) {
-        board.addMouseListener(listener);
+    public void addTileClickedListener(TileClickedListener listener) {
+        board.addListener(listener);
     }
 
     public void addNewGameListener(NewGameListener listener) {

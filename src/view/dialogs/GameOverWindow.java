@@ -1,20 +1,19 @@
 package view.dialogs;
 
-import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 import view.DefaultViewSettings;
+import view.input_components.NewGameButton;
 import interfaces.NewGameListener;
 
 public class GameOverWindow extends JDialog implements ActionListener {
     JLabel title;
     JLabel winner;
-    JButton newGameButton;
+    NewGameButton newGameButton;
     JButton showBoardButton;
     JPanel buttonPanel;
-    ArrayList<NewGameListener> newGameListeners = new ArrayList<>();
     
     public GameOverWindow(Window owner) {
         super(owner);
@@ -29,7 +28,7 @@ public class GameOverWindow extends JDialog implements ActionListener {
         winner.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(winner);
 
-        newGameButton = new JButton("New Game");
+        newGameButton = new NewGameButton();
         showBoardButton = new JButton("Show Board");
         buttonPanel = new JPanel();
         newGameButton.addActionListener(this);
@@ -58,16 +57,11 @@ public class GameOverWindow extends JDialog implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == newGameButton) {
-            for (NewGameListener it : newGameListeners) {
-                it.startNewGame();
-            }
-        }
         setModal(false);
         setVisible(false);
     }
 
     public void addNewGameListener(NewGameListener listener) {
-        newGameListeners.add(listener);
+        newGameButton.addListener(listener);
     }
 }

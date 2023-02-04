@@ -1,4 +1,4 @@
-package view.dialogs.settings_window;
+package view.input_components;
 
 import java.util.ArrayList;
 import java.awt.*;
