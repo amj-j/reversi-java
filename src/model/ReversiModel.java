@@ -25,7 +25,7 @@ public class ReversiModel implements ReversiModelInterface {
 
     public void sendNewGame() {
         for (ReversiModelListener listener : listeners) {
-            listener.newGame(boardSize);
+            listener.newGame(boardSize, singleplayer);
         }
     }
 

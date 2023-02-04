@@ -1,19 +1,22 @@
 package view.dialogs;
 
+import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 import view.DefaultViewSettings;
+import interfaces.NewGameListener;
 
-public class GameOver extends JDialog implements ActionListener {
+public class GameOverWindow extends JDialog implements ActionListener {
     JLabel title;
     JLabel winner;
     JButton newGameButton;
     JButton showBoardButton;
     JPanel buttonPanel;
+    ArrayList<NewGameListener> newGameListeners = new ArrayList<>();
     
-    public GameOver(Window owner) {
+    public GameOverWindow(Window owner) {
         super(owner);
         adjustSize();
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
@@ -37,7 +40,7 @@ public class GameOver extends JDialog implements ActionListener {
         
     }
 
-    private void  adjustSize() {
+    private void adjustSize() {
         Dimension dimension = getOwner().getSize();
         dimension.height /= 3;
         dimension.width = dimension.height*2;
@@ -55,11 +58,16 @@ public class GameOver extends JDialog implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == newGameButton) {
+            for (NewGameListener it : newGameListeners) {
+                it.startNewGame();
+            }
+        }
         setModal(false);
         setVisible(false);
     }
 
-    public void addNewGameButtonListener(ActionListener listener) {
-        newGameButton.addActionListener(listener);
+    public void addNewGameListener(NewGameListener listener) {
+        newGameListeners.add(listener);
     }
 }

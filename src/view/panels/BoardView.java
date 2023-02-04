@@ -8,11 +8,11 @@ import java.util.EnumMap;
 
 import structures.*;
 import view.DefaultViewSettings;
-import view.Player;
 
 public class BoardView extends JPanel {
     TileView[][] tiles;
     private int size;
+    private boolean highlightMoves = DefaultViewSettings.HIGHLIGHT_MOVES;
 
     public BoardView(int boardSize, Container parent) {
         this.size = boardSize;
@@ -31,7 +31,7 @@ public class BoardView extends JPanel {
     private void initTiles() {
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
-                tiles[x][y] = new TileView(new Coords(x, y));
+                tiles[x][y] = new TileView(new Coords(x, y), this);
                 if ((x%2 == 0 && y%2 == 0) || (x%2 == 1 && y%2 == 1)) {
                     tiles[x][y].setBackground(DefaultViewSettings.TILE_COLOR1);
                 }
@@ -54,6 +54,9 @@ public class BoardView extends JPanel {
     }
 
     public void setPlayableTiles(ArrayList<Coords> playableTiles) {
+        if (!highlightMoves) {
+            return;
+        }
         for (Coords coords : playableTiles) {
             tiles[coords.x][coords.y].setPlayability(true);
         }
@@ -63,5 +66,14 @@ public class BoardView extends JPanel {
         for (Coords coords : playableTiles) {
             tiles[coords.x][coords.y].setPlayability(false);
         }
+    }
+
+    public boolean areMovesHighlighted() {
+        return this.highlightMoves;
+    }
+
+    public void setHighlightMoves(boolean bool) {
+        this.highlightMoves = bool;
+        repaint();
     }
 }

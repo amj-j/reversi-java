@@ -9,10 +9,10 @@ import java.util.EnumMap;
 
 import structures.*;
 import view.panels.BoardView;
-import view.panels.GameMenu;
 import view.panels.PlayerPanel;
+import view.panels.game_menu.GameMenu;
 import interfaces.*;
-import view.dialogs.DialogWindows;
+import view.dialogs.GameOverWindow;
 
 public class ReversiView extends JFrame implements ReversiModelListener, ReversiViewInterface, ComponentListener, WindowStateListener {
     GameMenu menu;
@@ -20,7 +20,8 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
     PlayerPanel topPanel;
     PlayerPanel bottomPanel;
     EnumMap<Owner, Player> players = new EnumMap<>(Owner.class);
-    DialogWindows dialogs = new DialogWindows(this);
+    GameOverWindow gameOverWindow = new GameOverWindow(this);
+    boolean singleplayer;
     
     public ReversiView(int boardSize) {
         setSize(DefaultViewSettings.WINDOW_WIDTH, DefaultViewSettings.WINDOW_WIDTH);
@@ -29,7 +30,9 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
         players.put(Owner.PLAYER_1, new Player(Owner.PLAYER_1, DefaultViewSettings.PLAYER1_NAME, DefaultViewSettings.PLAYER1_COLOR));
         players.put(Owner.PLAYER_2, new Player(Owner.PLAYER_2, DefaultViewSettings.PLAYER2_NAME, DefaultViewSettings.PLAYER2_COLOR));
         
-        initMenu();
+        this.menu = new GameMenu(this, this);
+        menu.setAlignmentX(CENTER_ALIGNMENT);
+        this.add(menu);
         
         this.topPanel = new PlayerPanel(players.get(Owner.PLAYER_2));
         topPanel.setAlignmentX(CENTER_ALIGNMENT);
@@ -46,14 +49,9 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void newGame(int boardSize) {
+    public void newGame(int boardSize, boolean singleplayer) {
+        this.singleplayer = singleplayer;
         board.newBoard(boardSize);
-    }
-
-    public void initMenu() {
-        this.menu = new GameMenu();
-        menu.setAlignmentX(CENTER_ALIGNMENT);
-        this.add(menu);
     }
 
     public void initBoard(int boardSize) {
@@ -125,11 +123,54 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
 
     public void gameOver(Owner player) {
         String playerName = players.get(player).getName();
-        dialogs.gameOver.open(playerName);
+        gameOverWindow.open(playerName);
     }
+
+    public EnumMap<Owner, Player> getPlayers() {
+        return this.players;
+    }
+
+    public boolean isSingleplayer() {
+        return this.singleplayer;
+    }
+
+    public void setHighlightMoves(boolean bool) {
+        board.setHighlightMoves(bool);
+    }
+
+    public boolean areMovesHighlighted() {
+        return board.areMovesHighlighted();
+    }
+
+
 
     public void addTileClickedListener(MouseListener listener) {
         board.addMouseListener(listener);
+    }
+
+    public void addNewGameListener(NewGameListener listener) {
+        gameOverWindow.addNewGameListener(listener);
+        menu.addNewGameListener(listener);
+    }
+
+    public void addPlayerNameListener(PlayerNameListener listener) {
+        menu.addPlayerNameListener(listener);
+    }
+
+    public void addHighlightMovesListener(HighlightMovesListener listener) {
+        menu.addHighlightMovesListener(listener);
+    }
+
+    public void addSingleplayerListener(SingleplayerListener listener) {
+        menu.addSingleplayerListener(listener);
+    }
+
+    public void addBoardSizeListener(BoardSizeListener listener) {
+        menu.addBoardSizeListener(listener);
+    }
+
+    public void addResetSettingsListener(ResetSettingsListener listener) {
+        menu.addResetSettingsListener(listener);
     }
 
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import structures.*;
 
 public interface ReversiModelListener {
-    public void newGame(int boardSize);
+    public void newGame(int boardSize, boolean singleplayer);
     public void updateBoard(BoardChange change);
     public void newPlayableTiles(ArrayList<Coords> playableTiles);
     public void removePlayableTiles(ArrayList<Coords> playableTiles);

@@ -5,14 +5,15 @@ import javax.swing.*;
 
 import structures.*;
 import view.DefaultViewSettings;
-import view.Player;
 
 public class TileView extends JPanel {
+    BoardView board;
     Coords coords;
     Player owner = null;
     boolean playable = false;
     
-    public TileView(Coords coords) {
+    public TileView(Coords coords, BoardView board) {
+        this.board = board;
         this.coords = coords;
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -29,7 +30,7 @@ public class TileView extends JPanel {
         int diameter = Math.min(width, height) - 10;
         int x = (width - diameter) / 2;
         int y = (height - diameter) / 2;
-        if (playable) {
+        if (playable && board.areMovesHighlighted()) {
             g.setColor(DefaultViewSettings.PLAYABLE_TILE_COLOR);
             g.drawOval(x, y, diameter, diameter);
         }

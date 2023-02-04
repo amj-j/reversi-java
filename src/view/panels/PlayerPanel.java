@@ -3,8 +3,8 @@ package view.panels;
 import java.awt.*;
 import javax.swing.*;
 
+import structures.Player;
 import view.DefaultViewSettings;
-import view.Player;
 
 public class PlayerPanel extends JPanel {
     Player owner;

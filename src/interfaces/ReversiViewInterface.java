@@ -1,7 +1,19 @@
 package interfaces;
 
 import java.awt.event.*;
+import java.util.EnumMap;
+
+import structures.*;
 
 public interface ReversiViewInterface {
+    public EnumMap<Owner, Player> getPlayers();
+    public boolean areMovesHighlighted();
+    public boolean isSingleplayer();
+    
     public void addTileClickedListener(MouseListener listener);
+    public void addPlayerNameListener(PlayerNameListener listener);
+    public void addHighlightMovesListener(HighlightMovesListener listener);
+    public void addSingleplayerListener(SingleplayerListener listener);
+    public void addBoardSizeListener(BoardSizeListener listener);
+    public void addResetSettingsListener(ResetSettingsListener listener);
 }

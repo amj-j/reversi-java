@@ -1,21 +1,22 @@
-package view;
+package structures;
 
 import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import structures.Owner;
 
 public class Player {
-    private Owner player;
+    private Owner owner;
     private String name;
     private Color color;
     private int tokenCount;
 
-    public Player( Owner player, String name, Color color) {
-        this.player = player;
+    public Player(Owner owner, String name, Color color) {
+        this.owner = owner;
         this.name = name;
         this.color = color;
         this.tokenCount = 0;
+    }
+
+    public Owner getOwner() {
+        return this.owner;
     }
 
     public void setName(String name) {
