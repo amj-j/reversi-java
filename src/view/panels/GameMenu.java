@@ -7,6 +7,7 @@ import javax.swing.*;
 import interfaces.*;
 import view.dialogs.settings_window.SettingsWindow;
 import view.input_components.NewGameButton;
+import view.DefaultViewSettings;
 
 public class GameMenu extends JPanel {
     NewGameButton newGameButton;
@@ -21,6 +22,7 @@ public class GameMenu extends JPanel {
         settingsButton = new JButton("Settings");
         add(settingsButton);
         settings = new SettingsWindow(owner, view);
+        setBackground(DefaultViewSettings.BG_COLOR);
         settingsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 settings.open();

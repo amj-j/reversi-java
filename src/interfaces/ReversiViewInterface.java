@@ -10,6 +10,7 @@ public interface ReversiViewInterface {
     public boolean isSingleplayer();
     
     public void addTileClickedListener(TileClickedListener listener);
+    public void addNewGameListener(NewGameListener listener);
     public void addPlayerNameListener(PlayerNameListener listener);
     public void addHighlightMovesListener(HighlightMovesListener listener);
     public void addSingleplayerListener(SingleplayerListener listener);

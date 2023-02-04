@@ -26,6 +26,7 @@ public class ReversiController implements ReversiControllerInterface,
 
         theModel.addListener(theView);
         theView.addTileClickedListener(this);
+        theView.addNewGameListener(this);
         theView.addPlayerNameListener(this);
         theView.addHighlightMovesListener(this);
         theView.addSingleplayerListener(this);

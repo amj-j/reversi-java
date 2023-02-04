@@ -1,6 +1,5 @@
 package view.dialogs.settings_window;
 
-import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
