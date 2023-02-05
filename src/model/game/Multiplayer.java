@@ -28,18 +28,22 @@ public class Multiplayer extends Game {
         }
         setPlayableTiles(currPlayer.opponent());
         if (playableTiles.isEmpty()) {
+            System.out.println("First one passes");
             sendPassMove(currPlayer.opponent());
             setPlayableTiles(currPlayer);
             if (playableTiles.isEmpty()) {
+                System.out.println("Second one passes");
                 sendPassMove(currPlayer.opponent());
                 sendGameOver(getWinner());
                 return;
+            }
+            else {
+                sendPlayableTiles();
             }
         }
         else {
             sendPlayableTiles();
             currPlayer = currPlayer.opponent();
         }
-        
     }
 }

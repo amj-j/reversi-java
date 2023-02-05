@@ -91,17 +91,14 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
         board.updateTiles(change, players);
         players.get(Owner.PLAYER_1).setTokenCount(change.tokenCounts.get(Owner.PLAYER_1));
         players.get(Owner.PLAYER_2).setTokenCount(change.tokenCounts.get(Owner.PLAYER_2));
-        repaint();
     }
 
     public void newPlayableTiles(ArrayList<Coords> playableTiles) {
         board.setPlayableTiles(playableTiles);
-        board.repaint();
     }
 
     public void removePlayableTiles(ArrayList<Coords> playableTiles) {
         board.removePlayableTiles(playableTiles);
-        board.repaint();
     }
 
     public void passMove(Owner player) {
@@ -112,19 +109,17 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
         popup.setSize(8*size, size);
         popup.setBackground(new Color(0, 0, 0, 0));
         JLabel writing = new JLabel(playerName + " passes");
-        Font font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, popup.getWidth());
+        Font font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, popup.getWidth()/8);
         writing.setFont(font);
         writing.setHorizontalAlignment(SwingConstants.CENTER);
         popup.add(writing);    
         popup.setLocationRelativeTo(this);
         popup.setVisible(true);
-
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         popup.setVisible(false);
         popup.dispose();
     }

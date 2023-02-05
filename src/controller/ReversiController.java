@@ -1,7 +1,5 @@
 package controller;
 
-import interfaces.ReversiControllerInterface;
-
 import model.ReversiModel;
 import structures.*;
 import view.ReversiView;
@@ -50,6 +48,11 @@ public class ReversiController implements ReversiControllerInterface,
     }
 
     public void tileClicked(Coords chosenTile) {
-        theModel.playTurn(chosenTile);
+        new Thread() {
+            @Override
+            public void run() {
+                theModel.playTurn(chosenTile);
+            }
+        }.start();
     }
 }

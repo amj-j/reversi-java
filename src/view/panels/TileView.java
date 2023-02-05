@@ -21,6 +21,7 @@ public class TileView extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
+        System.out.println("paintComponent called");
         super.paintComponent(g);
         if (owner == null && !playable) {
             return;
@@ -37,6 +38,7 @@ public class TileView extends JPanel {
         else if (owner != null) {
             g.setColor(owner.getColor());
             g.fillOval(x, y, diameter, diameter);
+            System.out.println("Oval filled");
         }
     }
 
@@ -47,25 +49,28 @@ public class TileView extends JPanel {
     public void addToken(Player newOwner) {
         this.owner = newOwner;
         repaint();
-        /*try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
+        try {
+            Thread.sleep(250);
+        }
+        catch(InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     public void turnToken(Player newOwner) {
         this.owner = newOwner;
         repaint();
-        /*try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
+        try {
+            Thread.sleep(250);
+        }
+        catch(InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     public void setPlayability(boolean playable) {
         this.playable = playable;
+        repaint();
     }
 
     public void clearTile() {
