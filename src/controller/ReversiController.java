@@ -20,22 +20,9 @@ public class ReversiController implements ReversiControllerInterface,
     private ReversiModel theModel;
     private ReversiView theView;
     
-    public ReversiController() {
-        this.theModel = new ReversiModel();
-        this.theView = new ReversiView(theModel.getBoardSize());
-
-        theModel.addListener(theView);
-        theView.addTileClickedListener(this);
-        theView.addNewGameListener(this);
-        theView.addPlayerNameListener(this);
-        theView.addHighlightMovesListener(this);
-        theView.addSingleplayerListener(this);
-        theView.addBoardSizeListener(this);
-        theView.addResetSettingsListener(this);
-
-
-        theModel.newGame();
-        theView.setVisible(true);
+    public ReversiController(ReversiModel theModel, ReversiView theView) {
+        this.theModel = theModel;
+        this.theView = theView;
     }
 
     public void changeBoardSize(int size) {
