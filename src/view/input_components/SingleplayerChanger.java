@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import interfaces.SingleplayerListener;
 import interfaces.ReversiViewInterface;
+import view.DefaultViewSettings;
 
 
 public class SingleplayerChanger extends JCheckBox implements ActionListener {
@@ -15,6 +16,7 @@ public class SingleplayerChanger extends JCheckBox implements ActionListener {
     public SingleplayerChanger(ReversiViewInterface view) {
         super("Singleplayer", view.isSingleplayer());
         addActionListener(this);
+        setBackground(DefaultViewSettings.BG_COLOR);
     }
 
     public void actionPerformed(ActionEvent e) {

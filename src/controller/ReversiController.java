@@ -37,7 +37,8 @@ public class ReversiController implements ReversiControllerInterface,
 
     public void nameChanged(String newName, Player player) {
         player.setName(newName);
-    }    
+        theView.viewNameChange(player);
+    }   
 
     public void resetSettings() {
         

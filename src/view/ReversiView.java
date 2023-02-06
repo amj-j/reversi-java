@@ -38,7 +38,7 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
         this.add(topPanel);
         this.add(board);
         this.add(bottomPanel);
-
+        addComponentListener(this);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -62,11 +62,11 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
     }
 
     private void initPanels() {
-        this.topPanel = new PlayerPanel(players.get(Owner.PLAYER_2));
+        this.topPanel = new PlayerPanel(players.get(Owner.PLAYER_1));
         topPanel.setAlignmentX(CENTER_ALIGNMENT);
         topPanel.setAlignmentY(TOP_ALIGNMENT);
 
-        this.bottomPanel = new PlayerPanel(players.get(Owner.PLAYER_1));
+        this.bottomPanel = new PlayerPanel(players.get(Owner.PLAYER_2));
         bottomPanel.setAlignmentX(CENTER_ALIGNMENT);
         bottomPanel.setAlignmentY(BOTTOM_ALIGNMENT);
     }
@@ -91,6 +91,8 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
         board.updateTiles(change, players);
         players.get(Owner.PLAYER_1).setTokenCount(change.tokenCounts.get(Owner.PLAYER_1));
         players.get(Owner.PLAYER_2).setTokenCount(change.tokenCounts.get(Owner.PLAYER_2));
+        topPanel.setValues();
+        bottomPanel.setValues();
     }
 
     public void newPlayableTiles(ArrayList<Coords> playableTiles) {
@@ -145,7 +147,14 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
         return board.areMovesHighlighted();
     }
 
-
+    public void viewNameChange(Player player) {
+        if (player.getOwner() == Owner.PLAYER_1) {
+            topPanel.setValues();
+        }
+        else {
+            bottomPanel.setValues();
+        }
+    }
 
     public void addTileClickedListener(TileClickedListener listener) {
         board.addListener(listener);
@@ -175,5 +184,4 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
     public void addResetSettingsListener(ResetSettingsListener listener) {
         menu.addResetSettingsListener(listener);
     }
-
 }

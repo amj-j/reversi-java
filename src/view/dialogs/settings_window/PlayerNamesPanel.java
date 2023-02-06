@@ -1,6 +1,7 @@
 package view.dialogs.settings_window;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import java.util.EnumMap;
 
@@ -10,7 +11,7 @@ import interfaces.ReversiViewInterface;
 import view.DefaultViewSettings;
 import view.input_components.PlayerNameChanger;
 
-public class PlayerNamesPanel extends JPanel {
+public class PlayerNamesPanel extends JPanel implements ComponentListener {
     
     JLabel title;
     PlayerNameChanger player1Struct;
@@ -28,14 +29,14 @@ public class PlayerNamesPanel extends JPanel {
         player2Struct = new PlayerNameChanger(players.get(Owner.PLAYER_2));
         add(player1Struct);
         add(player2Struct);
+        addComponentListener(this);
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-        Font font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, getWidth()/16);
-        title.setFont(font);
-        System.out.println("repaint");
-        super.paintComponent(g);
+    public void setFont() {
+        int fontSize = Math.min(getHeight(), getWidth()) /6;
+        Font font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, fontSize);
+        this.title.setForeground(DefaultViewSettings.FONT_COLOR);
+        this.title.setFont(font);
     }
 
     public void addListener(PlayerNameListener listener) {
@@ -43,7 +44,8 @@ public class PlayerNamesPanel extends JPanel {
         player2Struct.addListener(listener);
     }
 
-
-    
-
+    public void componentResized(ComponentEvent e) { setFont(); }
+    public void componentMoved(ComponentEvent e) {}
+    public void componentShown(ComponentEvent e) {}
+    public void componentHidden(ComponentEvent e) {}
 }

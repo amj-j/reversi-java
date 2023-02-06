@@ -18,4 +18,5 @@ public class DefaultViewSettings {
     public static final Color TILE_COLOR1 = new Color(0, 130, 0);
     public static final Color TILE_COLOR2 = new Color(0, 138, 0);
     public static final Color BG_COLOR = new Color(0, 160, 0);
+    public static final Color FONT_COLOR = new Color(255, 255, 255);
 }

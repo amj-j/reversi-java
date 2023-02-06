@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import interfaces.*;
+import view.DefaultViewSettings;
 import view.input_components.*;
 
 public class SettingsWindow extends JDialog implements ActionListener {
@@ -38,6 +39,7 @@ public class SettingsWindow extends JDialog implements ActionListener {
         southWest.setLayout(new GridLayout(2, 1));
         southEast.setLayout(new GridLayout(2, 1));
 
+        adjustWindowSize();
         setSizes();
 
         northWest.add(nwUpper);
@@ -54,6 +56,20 @@ public class SettingsWindow extends JDialog implements ActionListener {
 
         swLower.addCloseWindowListener(this);
         seLower.addCloseWindowListener(this);
+
+        Color noColor = new Color(0,0,0,0);
+        mainPanel.setBackground(noColor);
+        northWest.setBackground(noColor);
+        northEast.setBackground(noColor);
+        southWest.setBackground(noColor);
+        southEast.setBackground(noColor);
+        nwUpper.setBackground(noColor);
+        nwLower.setBackground(noColor);
+        swUpper.setBackground(noColor);
+        swLower.setBackground(noColor);
+        seUpper.setBackground(noColor);
+        seLower.setBackground(noColor);
+        setBackground(DefaultViewSettings.BG_COLOR);
     }
 
 
@@ -63,21 +79,21 @@ public class SettingsWindow extends JDialog implements ActionListener {
 
         width /= 2;
         height /= 2;
-        setSize(northWest, width, height);
-        setSize(northEast, width, height);
-        setSize(southWest, width, height);
-        setSize(southEast, width, height);
+        setPreciseSize(northWest, width, height);
+        setPreciseSize(northEast, width, height);
+        setPreciseSize(southWest, width, height);
+        setPreciseSize(southEast, width, height);
 
         height /= 2;
-        setSize(nwUpper, width, height);
-        setSize(nwLower, width, height);
-        setSize(swUpper, width, height);
-        setSize(swLower, width, height);
-        setSize(seUpper, width, height);
-        setSize(seLower, width, height);
+        setPreciseSize(nwUpper, width, height);
+        setPreciseSize(nwLower, width, height);
+        setPreciseSize(swUpper, width, height);
+        setPreciseSize(swLower, width, height);
+        setPreciseSize(seUpper, width, height);
+        setPreciseSize(seLower, width, height);
     }
 
-    private void setSize(JPanel panel, int width, int height) {
+    private void setPreciseSize(JPanel panel, int width, int height) {
         panel.setMaximumSize(new Dimension(width, height));
         panel.setMinimumSize(new Dimension(width, height));
     }
@@ -87,7 +103,7 @@ public class SettingsWindow extends JDialog implements ActionListener {
         setVisible(false);
     }
 
-    private void adjustSize() {
+    private void adjustWindowSize() {
         Dimension dimension = getOwner().getSize();
         dimension.height /= 2;
         dimension.width = dimension.height*2;
@@ -96,9 +112,16 @@ public class SettingsWindow extends JDialog implements ActionListener {
 
     public void open() {
         setModal(true);
-        adjustSize();
+        adjustWindowSize();
+        setSizes();
         setLocationRelativeTo(getOwner());
         setVisible(true);
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        setSizes();
+        super.paint(g);
     }
 
     public void addPlayerNameListener(PlayerNameListener listener) {

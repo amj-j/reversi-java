@@ -1,7 +1,6 @@
 package view.input_components;
 
 import java.util.ArrayList;
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 

@@ -1,6 +1,7 @@
 package view.dialogs.settings_window;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
@@ -22,5 +23,11 @@ public class ResetSettingsPanel extends JPanel {
 
     public void addCloseWindowListener(ActionListener listener) {
         resetSettingsButton.addActionListener(listener);
+    }
+
+    @Override
+    public void setMaximumSize(Dimension d) {
+        super.setMaximumSize(d);
+        resetSettingsButton.setMaximumSize(new Dimension(d.width/2, d.height/2));
     }
 }
