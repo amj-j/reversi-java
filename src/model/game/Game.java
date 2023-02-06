@@ -52,6 +52,12 @@ public abstract class Game {
         throw new GameOverException();
     }
 
+    public void sendStall(int millis) {
+        for (ReversiModelListener listener : listeners) {
+            listener.stall(millis);
+        }
+    }
+
     public void playTurn(Coords chosenTile) throws GameOverException {}
 
     public int getBoardSize() {

@@ -11,4 +11,5 @@ public interface ReversiModelListener {
     public void removePlayableTiles(ArrayList<Coords> playableTiles);
     public void passMove(Owner player);
     public void gameOver(Owner winner);
+    public void stall(int millis);
 }

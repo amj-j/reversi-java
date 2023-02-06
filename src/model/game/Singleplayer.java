@@ -26,16 +26,16 @@ public class Singleplayer extends Game {
         if (isBoardFull()) {
             sendGameOver(getWinner());
         }
-        boolean passed = playBot();
+        boolean botPassed = playBot();
         setPlayableTiles(player);
         if (playableTiles.isEmpty()) {
             sendPassMove(player);
-            if (passed) {
+            if (botPassed) {
                 sendGameOver(player);
                 return;
             }
         }
-        
+        sendPlayableTiles();
     }
 
     public boolean playBot() throws GameOverException {
@@ -45,6 +45,7 @@ public class Singleplayer extends Game {
             return true;
         }
         Coords bestMove = calcBestMove(bot);
+        sendStall(1000);
         BoardChange boardChange = play(bot, bestMove);
         sendBoardChange(boardChange);
         if (isBoardFull()) {

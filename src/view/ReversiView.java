@@ -117,11 +117,7 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
         popup.add(writing);    
         popup.setLocationRelativeTo(this);
         popup.setVisible(true);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        stall(2000);
         popup.setVisible(false);
         popup.dispose();
     }
@@ -129,6 +125,14 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
     public void gameOver(Owner player) {
         String playerName = players.get(player).getName();
         gameOverWindow.open(playerName);
+    }
+
+    public void stall(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public EnumMap<Owner, Player> getPlayers() {
