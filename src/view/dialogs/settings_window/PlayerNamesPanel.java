@@ -20,7 +20,7 @@ public class PlayerNamesPanel extends JPanel {
         EnumMap <Owner, Player> players = view.getPlayers();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         title = new JLabel("Player names");
-        Font font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, getWidth()/6);
+        Font font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, getWidth()/16);
         title.setFont(font);
         add(title);
 
@@ -32,14 +32,15 @@ public class PlayerNamesPanel extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        Font font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, getWidth()/6);
+        Font font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, getWidth()/16);
         title.setFont(font);
+        System.out.println("repaint");
         super.paintComponent(g);
     }
 
     public void addListener(PlayerNameListener listener) {
         player1Struct.addListener(listener);
-        player1Struct.addListener(listener);
+        player2Struct.addListener(listener);
     }
 
 

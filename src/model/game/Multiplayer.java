@@ -33,7 +33,7 @@ public class Multiplayer extends Game {
             setPlayableTiles(currPlayer);
             if (playableTiles.isEmpty()) {
                 System.out.println("Second one passes");
-                sendPassMove(currPlayer.opponent());
+                sendPassMove(currPlayer);
                 sendGameOver(getWinner());
                 return;
             }

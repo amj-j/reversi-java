@@ -27,5 +27,4 @@ public class HighlightMovesChanger extends JCheckBox implements ActionListener {
     public void addListener(HighlightMovesListener listener) {
         listeners.add(listener);
     }
-
 }

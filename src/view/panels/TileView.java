@@ -21,7 +21,6 @@ public class TileView extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        System.out.println("paintComponent called");
         super.paintComponent(g);
         if (owner == null && !playable) {
             return;
@@ -38,7 +37,6 @@ public class TileView extends JPanel {
         else if (owner != null) {
             g.setColor(owner.getColor());
             g.fillOval(x, y, diameter, diameter);
-            System.out.println("Oval filled");
         }
     }
 

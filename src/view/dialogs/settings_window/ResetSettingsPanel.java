@@ -1,0 +1,26 @@
+package view.dialogs.settings_window;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import javax.swing.JPanel;
+
+import interfaces.ResetSettingsListener;
+import view.input_components.ResetSettingsButton;
+
+public class ResetSettingsPanel extends JPanel {
+    ResetSettingsButton resetSettingsButton;
+
+    public ResetSettingsPanel() {
+        resetSettingsButton = new ResetSettingsButton();
+        setLayout(new BorderLayout());
+        add(resetSettingsButton, BorderLayout.CENTER);
+    }
+
+    public void addResetSettingsListener(ResetSettingsListener listener) {
+        resetSettingsButton.addListener(listener);
+    }
+
+    public void addCloseWindowListener(ActionListener listener) {
+        resetSettingsButton.addActionListener(listener);
+    }
+}
