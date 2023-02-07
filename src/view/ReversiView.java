@@ -113,6 +113,7 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
         JLabel writing = new JLabel(playerName + " passes");
         Font font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, popup.getWidth()/8);
         writing.setFont(font);
+        writing.setForeground(DefaultViewSettings.FONT_COLOR);
         writing.setHorizontalAlignment(SwingConstants.CENTER);
         popup.add(writing);    
         popup.setLocationRelativeTo(this);

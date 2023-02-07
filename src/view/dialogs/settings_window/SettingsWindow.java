@@ -21,10 +21,10 @@ public class SettingsWindow extends JDialog implements ActionListener {
     HighlightMovesPanel nwLower;
 
     BoardSizeChanger swUpper = new BoardSizeChanger();
-    NewGamePanel swLower = new NewGamePanel();
+    ResetSettingsPanel swLower = new ResetSettingsPanel();
 
     JPanel seUpper = new JPanel();
-    ResetSettingsPanel seLower = new ResetSettingsPanel();
+    CloseWindowPanel seLower = new CloseWindowPanel();
 
     public SettingsWindow(Window owner, ReversiViewInterface view) {
         super(owner);
@@ -140,11 +140,7 @@ public class SettingsWindow extends JDialog implements ActionListener {
         swUpper.addListener(listener);
     }
 
-    public void addNewGameListener(NewGameListener listener) {
-        swLower.addNewGameListener(listener);
-    }
-
     public void addResetSettingsListener(ResetSettingsListener listener) {
-        seLower.addResetSettingsListener(listener);
+        swLower.addResetSettingsListener(listener);
     }
 }

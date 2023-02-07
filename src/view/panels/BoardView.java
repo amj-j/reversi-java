@@ -88,7 +88,6 @@ public class BoardView extends JPanel implements MouseListener {
     
     public void mouseClicked(MouseEvent click) {
         TileView tile;
-        System.out.println("KLIK");
         try {
             tile = (TileView) getComponentAt(click.getPoint());
         } catch(Exception e) { 
