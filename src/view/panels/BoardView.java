@@ -18,18 +18,17 @@ public class BoardView extends JPanel implements MouseListener {
     ArrayList<TileClickedListener> listeners = new ArrayList<>();
 
     public BoardView(int boardSize, Container parent) {
-        this.size = boardSize;
-        tiles = new TileView[size][size];
-        setBackground(DefaultViewSettings.BG_COLOR);
-        setLayout(new GridLayout(size, size));
+        newBoard(boardSize);
         addMouseListener(this);
-        initTiles();
     }
 
     public void newBoard(int size) {
-        this.size = size;
         removeAll();
+        this.size = size;
+        tiles = new TileView[size][size];
+        setLayout(new GridLayout(size, size));
         initTiles();
+        setBackground(DefaultViewSettings.BG_COLOR);
     }
 
     private void initTiles() {
