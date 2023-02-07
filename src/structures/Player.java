@@ -27,7 +27,7 @@ public class Player {
         return this.name;
     }
 
-    public void changeColor(Color color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 

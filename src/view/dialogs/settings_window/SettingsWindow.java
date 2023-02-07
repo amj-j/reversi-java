@@ -23,7 +23,7 @@ public class SettingsWindow extends JDialog implements ActionListener {
     BoardSizeChanger swUpper = new BoardSizeChanger();
     ResetSettingsPanel swLower = new ResetSettingsPanel();
 
-    JPanel seUpper = new JPanel();
+    TogglePlayerColorsPanel seUpper = new TogglePlayerColorsPanel();
     CloseWindowPanel seLower = new CloseWindowPanel();
 
     public SettingsWindow(Window owner, ReversiViewInterface view) {
@@ -138,6 +138,10 @@ public class SettingsWindow extends JDialog implements ActionListener {
 
     public void addBoardSizeListener(BoardSizeListener listener) {
         swUpper.addListener(listener);
+    }
+
+    public void addTogglePlayerColorsListener(TogglePlayerColorsListener listener) {
+        seUpper.addTogglePlayerColorsListener(listener);
     }
 
     public void addResetSettingsListener(ResetSettingsListener listener) {

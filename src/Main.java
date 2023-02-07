@@ -15,8 +15,8 @@ public class Main {
         theView.addHighlightMovesListener(theController);
         theView.addSingleplayerListener(theController);
         theView.addBoardSizeListener(theController);
+        theView.addTogglePlayerColorsListener(theController);
         theView.addResetSettingsListener(theController);
-
 
         theModel.newGame();
         theView.setVisible(true);    

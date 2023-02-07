@@ -11,4 +11,5 @@ public interface ReversiModelInterface {
     public boolean isSingleplayer();  
     public BoardChange getBoardStatus(); 
     public void playTurn(Coords chosenTile); 
+    public void sendPlayableTiles();
 }

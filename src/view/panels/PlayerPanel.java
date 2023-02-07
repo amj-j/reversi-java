@@ -7,7 +7,7 @@ import java.awt.event.*;
 import structures.Player;
 import view.DefaultViewSettings;
 
-public class PlayerPanel extends JPanel implements ComponentListener {
+public class PlayerPanel extends JPanel {
     Player owner;
     JLabel name;
     JLabel playerColor;
@@ -24,7 +24,10 @@ public class PlayerPanel extends JPanel implements ComponentListener {
         add(tokenCount);
         setValues();
         setFont();
-        addComponentListener(this);
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) { setFont(); }
+        });
     }
 
     public void setValues() {    
@@ -36,14 +39,9 @@ public class PlayerPanel extends JPanel implements ComponentListener {
     public void setFont() {
         int fontSize = Math.min(getHeight(), getWidth()) /2;
         Font font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, fontSize);
-        this.name.setForeground(DefaultViewSettings.FONT_COLOR);
-        this.tokenCount.setForeground(DefaultViewSettings.FONT_COLOR);
+        this.name.setForeground(owner.getColor());
+        this.tokenCount.setForeground(owner.getColor());
         this.name.setFont(font);
         this.tokenCount.setFont(font);
     }
-
-    public void componentResized(ComponentEvent e) { setFont(); }
-    public void componentMoved(ComponentEvent e) {}
-    public void componentShown(ComponentEvent e) {}
-    public void componentHidden(ComponentEvent e) {}
 }

@@ -38,7 +38,6 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
         this.add(topPanel);
         this.add(board);
         this.add(bottomPanel);
-        addComponentListener(this);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -63,6 +62,7 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
 
     private void initPanels() {
         this.topPanel = new PlayerPanel(players.get(Owner.PLAYER_1));
+        
         topPanel.setAlignmentX(CENTER_ALIGNMENT);
         topPanel.setAlignmentY(TOP_ALIGNMENT);
 
@@ -161,6 +161,17 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
         }
     }
 
+    public void togglePlayerColors() {
+        Player player1 = getPlayers().get(Owner.PLAYER_1);
+        Player player2 = getPlayers().get(Owner.PLAYER_2);
+        Color tmp = player1.getColor();
+        player1.setColor(player2.getColor());
+        player2.setColor(tmp);
+        board.repaint();
+        topPanel.setFont();
+        bottomPanel.setFont();
+    }
+
     public void addTileClickedListener(TileClickedListener listener) {
         board.addListener(listener);
     }
@@ -184,6 +195,10 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
 
     public void addBoardSizeListener(BoardSizeListener listener) {
         menu.addBoardSizeListener(listener);
+    }
+
+    public void addTogglePlayerColorsListener(TogglePlayerColorsListener listener) {
+        menu.addTogglePlayerColorsListener(listener);
     }
 
     public void addResetSettingsListener(ResetSettingsListener listener) {

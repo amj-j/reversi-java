@@ -11,7 +11,7 @@ import interfaces.ReversiViewInterface;
 import view.DefaultViewSettings;
 import view.input_components.PlayerNameChanger;
 
-public class PlayerNamesPanel extends JPanel implements ComponentListener {
+public class PlayerNamesPanel extends JPanel {
     
     JLabel title;
     PlayerNameChanger player1Struct;
@@ -29,7 +29,10 @@ public class PlayerNamesPanel extends JPanel implements ComponentListener {
         player2Struct = new PlayerNameChanger(players.get(Owner.PLAYER_2));
         add(player1Struct);
         add(player2Struct);
-        addComponentListener(this);
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) { setFont(); }
+        });
     }
 
     public void setFont() {
@@ -43,9 +46,4 @@ public class PlayerNamesPanel extends JPanel implements ComponentListener {
         player1Struct.addListener(listener);
         player2Struct.addListener(listener);
     }
-
-    public void componentResized(ComponentEvent e) { setFont(); }
-    public void componentMoved(ComponentEvent e) {}
-    public void componentShown(ComponentEvent e) {}
-    public void componentHidden(ComponentEvent e) {}
 }

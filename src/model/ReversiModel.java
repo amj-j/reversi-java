@@ -29,6 +29,12 @@ public class ReversiModel implements ReversiModelInterface {
         }
     }
 
+    public void sendPlayableTiles() {
+        if (game != null) {
+            game.sendPlayableTiles();
+        }
+    }
+
     public void addListener(ReversiModelListener listener) {
         listeners.add(listener);
     }

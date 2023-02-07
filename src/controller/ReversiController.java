@@ -12,6 +12,7 @@ public class ReversiController implements ReversiControllerInterface,
     PlayerNameListener,
     ResetSettingsListener,
     SingleplayerListener,
+    TogglePlayerColorsListener,
     TileClickedListener
 {
 
@@ -29,6 +30,9 @@ public class ReversiController implements ReversiControllerInterface,
 
     public void setHighlightMoves(boolean bool) {
         theView.setHighlightMoves(bool);
+        if (bool == true) {
+            theModel.sendPlayableTiles();
+        }
     }
 
     public void startNewGame() {
@@ -46,6 +50,10 @@ public class ReversiController implements ReversiControllerInterface,
 
     public void setSingleplayer(boolean bool) {
         theModel.setSingleplayer(bool);
+    }
+
+    public void toggleColors() {
+        theView.togglePlayerColors();;
     }
 
     public void tileClicked(Coords chosenTile) {

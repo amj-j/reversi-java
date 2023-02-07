@@ -4,8 +4,8 @@ import java.awt.Color;
 
 public class DefaultViewSettings {
     
-    public static final String PLAYER1_NAME = "Player1";
-    public static final String PLAYER2_NAME = "Player2";
+    public static final String PLAYER1_NAME = "Bill";
+    public static final String PLAYER2_NAME = "John";
     public static final boolean HIGHLIGHT_MOVES = true;
     public static final int WINDOW_HEIGHT = 500;
     public static final int WINDOW_WIDTH = 500;

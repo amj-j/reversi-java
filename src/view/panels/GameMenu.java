@@ -50,6 +50,10 @@ public class GameMenu extends JPanel {
         settings.addBoardSizeListener(listener);
     }
 
+    public void addTogglePlayerColorsListener(TogglePlayerColorsListener listener) {
+        settings.addTogglePlayerColorsListener(listener);
+    }
+
     public void addResetSettingsListener(ResetSettingsListener listener) {
         settings.addResetSettingsListener(listener);
     }
