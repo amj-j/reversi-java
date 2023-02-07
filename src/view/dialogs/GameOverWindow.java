@@ -19,24 +19,41 @@ public class GameOverWindow extends JDialog implements ActionListener {
         super(owner);
         adjustSize();
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        setBackground(DefaultViewSettings.BG_COLOR);
 
         title = new JLabel("Game Over!");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setBackground(DefaultViewSettings.BG_COLOR);
         add(title);
 
         winner = new JLabel("???");
         winner.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setBackground(DefaultViewSettings.BG_COLOR);
         add(winner);
 
         newGameButton = new NewGameButton();
         showBoardButton = new JButton("Show Board");
         buttonPanel = new JPanel();
+        buttonPanel.setBackground(DefaultViewSettings.BG_COLOR);
         newGameButton.addActionListener(this);
         showBoardButton.addActionListener(this);
         buttonPanel.add(newGameButton);
         buttonPanel.add(showBoardButton);
         add(buttonPanel);
-        
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                setButtonsSize();
+                setFont();
+            }
+        });
+    }
+
+    private void setButtonsSize() {
+        int width = Math.min(getHeight(), getWidth()) / 6;
+        Dimension d = new Dimension(width, width/2);
+        newGameButton.setMaximumSize(d);
+        newGameButton.setMaximumSize(d);
     }
 
     private void adjustSize() {
@@ -46,13 +63,24 @@ public class GameOverWindow extends JDialog implements ActionListener {
         setSize(dimension);
     }
 
+    public void setFont() {
+        int fontSize = Math.min(getHeight(), getWidth()) /5;
+        Font font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, fontSize);
+        title.setForeground(DefaultViewSettings.FONT_COLOR);
+        title.setFont(font);
+        fontSize = Math.min(getHeight(), getWidth()) /7;
+        font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, fontSize);
+        winner.setForeground(DefaultViewSettings.FONT_COLOR);
+        winner.setFont(font);
+    }
+
     public void open(String winnerName) {
         setModal(true);
         adjustSize();
         setLocationRelativeTo(getOwner());
-        title.setFont(new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, getWidth() /12));
         winner.setText(winnerName + " wins!");
-        winner.setFont(new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, getWidth() /16));
+        setButtonsSize();
+        setFont();
         setVisible(true);
     }
 
