@@ -28,6 +28,10 @@ public class HighlightMovesPanel extends JPanel {
         });
     }
 
+    public void resetCheckBox() {
+        highlightMovesChanger.reset();
+    }
+
     public void addHighlightMovesListener(HighlightMovesListener listener) {
         highlightMovesChanger.addListener(listener);
     }

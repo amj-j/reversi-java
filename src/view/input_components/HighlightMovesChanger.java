@@ -10,13 +10,19 @@ import view.DefaultViewSettings;
 
 
 public class HighlightMovesChanger extends JCheckBox implements ActionListener {
-    
+    ReversiViewInterface view;
     ArrayList<HighlightMovesListener> listeners = new ArrayList<>();
 
     public HighlightMovesChanger(ReversiViewInterface view) {
         super("Highlight moves", view.areMovesHighlighted());
+        this.view = view;
         addActionListener(this);
         setBackground(DefaultViewSettings.BG_COLOR);
+    }
+
+    public void reset() {
+        setSelected(view.areMovesHighlighted());
+        repaint();
     }
 
     public void actionPerformed(ActionEvent e) {

@@ -28,6 +28,10 @@ public class SingleplayerPanel extends JPanel {
         });
     }
 
+    public void resetCheckBox() {
+        singleplayerChanger.reset();
+    }
+
     public void addSingleplayerListener(SingleplayerListener listener) {
         singleplayerChanger.addListener(listener);
     }

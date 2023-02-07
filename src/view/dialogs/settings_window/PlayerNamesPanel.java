@@ -35,6 +35,12 @@ public class PlayerNamesPanel extends JPanel {
         });
     }
 
+    public void resetNames() {
+        player1Struct.reset(DefaultViewSettings.PLAYER1_NAME);
+        player2Struct.reset(DefaultViewSettings.PLAYER2_NAME);
+        repaint();
+    }
+
     public void setFont() {
         int fontSize = Math.min(getHeight(), getWidth()) /6;
         Font font = new Font(DefaultViewSettings.FONT_NAME, Font.BOLD, fontSize);

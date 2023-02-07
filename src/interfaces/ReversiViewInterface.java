@@ -8,6 +8,7 @@ public interface ReversiViewInterface {
     public EnumMap<Owner, Player> getPlayers();
     public boolean areMovesHighlighted();
     public boolean isSingleplayer();
+    public void resetToDefault();
     
     public void addTileClickedListener(TileClickedListener listener);
     public void addNewGameListener(NewGameListener listener);

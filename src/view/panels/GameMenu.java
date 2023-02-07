@@ -29,6 +29,10 @@ public class GameMenu extends JPanel {
             }
         });
     }
+
+    public void resetSettings() {
+        settings.resetSettings();
+    }
     
     public void addNewGameListener(NewGameListener listener) {
         newGameButton.addListener(listener);

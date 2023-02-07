@@ -45,7 +45,9 @@ public class ReversiController implements ReversiControllerInterface,
     }   
 
     public void resetSettings() {
-        
+        theModel.resetToDefault();
+        theView.resetToDefault();
+        theModel.sendPlayableTiles();
     }
 
     public void setSingleplayer(boolean bool) {

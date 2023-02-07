@@ -68,4 +68,10 @@ public class ReversiModel implements ReversiModelInterface {
 
         }
     }
+
+    public void resetToDefault() {
+        this.boardSize = DefaultSettings.BOARD_SIZE;
+        this.singleplayer = DefaultSettings.SINGLEPLAYER;
+        newGame();
+    }
 }

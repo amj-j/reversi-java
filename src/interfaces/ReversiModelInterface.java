@@ -12,4 +12,5 @@ public interface ReversiModelInterface {
     public BoardChange getBoardStatus(); 
     public void playTurn(Coords chosenTile); 
     public void sendPlayableTiles();
+    public void resetToDefault();
 }

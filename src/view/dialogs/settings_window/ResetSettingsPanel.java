@@ -2,7 +2,6 @@ package view.dialogs.settings_window;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 import interfaces.ResetSettingsListener;
@@ -19,10 +18,6 @@ public class ResetSettingsPanel extends JPanel {
 
     public void addResetSettingsListener(ResetSettingsListener listener) {
         resetSettingsButton.addListener(listener);
-    }
-
-    public void addCloseWindowListener(ActionListener listener) {
-        resetSettingsButton.addActionListener(listener);
     }
 
     @Override

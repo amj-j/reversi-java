@@ -54,22 +54,21 @@ public class SettingsWindow extends JDialog implements ActionListener {
         mainPanel.add(southEast);
         this.add(mainPanel);
 
-        swLower.addCloseWindowListener(this);
         seLower.addCloseWindowListener(this);
 
-        Color noColor = new Color(0,0,0,0);
-        mainPanel.setBackground(noColor);
-        northWest.setBackground(noColor);
-        northEast.setBackground(noColor);
-        southWest.setBackground(noColor);
-        southEast.setBackground(noColor);
-        nwUpper.setBackground(noColor);
-        nwLower.setBackground(noColor);
-        swUpper.setBackground(noColor);
-        swLower.setBackground(noColor);
-        seUpper.setBackground(noColor);
-        seLower.setBackground(noColor);
-        setBackground(DefaultViewSettings.BG_COLOR);
+        Color color = DefaultViewSettings.BG_COLOR;
+        mainPanel.setBackground(color);
+        northWest.setBackground(color);
+        northEast.setBackground(color);
+        southWest.setBackground(color);
+        southEast.setBackground(color);
+        nwUpper.setBackground(color);
+        nwLower.setBackground(color);
+        swUpper.setBackground(color);
+        swLower.setBackground(color);
+        seUpper.setBackground(color);
+        seLower.setBackground(color);
+        setBackground(color);
     }
 
 
@@ -122,6 +121,13 @@ public class SettingsWindow extends JDialog implements ActionListener {
     public void paint(Graphics g) {
         setSizes();
         super.paint(g);
+    }
+
+    public void resetSettings() {
+        nwUpper.resetCheckBox();
+        nwLower.resetCheckBox();
+        northEast.resetNames();
+        swUpper.reset();
     }
 
     public void addPlayerNameListener(PlayerNameListener listener) {

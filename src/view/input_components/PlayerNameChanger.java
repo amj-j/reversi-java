@@ -1,11 +1,11 @@
 package view.input_components;
 
-import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
 
 import structures.*;
+import view.DefaultViewSettings;
 import interfaces.PlayerNameListener;
 
 public class PlayerNameChanger extends JPanel implements ActionListener {
@@ -21,7 +21,12 @@ public class PlayerNameChanger extends JPanel implements ActionListener {
         add(this.playerName);
         add(this.playerSaveButton);
         playerSaveButton.addActionListener(this);
-        setBackground(new Color(0,0,0,0));
+        setBackground(DefaultViewSettings.BG_COLOR);
+    }
+
+    public void reset(String name) {
+        playerName.setText(name);
+        repaint();
     }
     
     public void actionPerformed(ActionEvent e) {

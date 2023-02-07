@@ -10,13 +10,19 @@ import view.DefaultViewSettings;
 
 
 public class SingleplayerChanger extends JCheckBox implements ActionListener {
-    
+    ReversiViewInterface view;
     ArrayList<SingleplayerListener> listeners = new ArrayList<>();
 
     public SingleplayerChanger(ReversiViewInterface view) {
         super("Singleplayer", view.isSingleplayer());
+        this.view = view;
         addActionListener(this);
         setBackground(DefaultViewSettings.BG_COLOR);
+    }
+
+    public void reset() {
+        setSelected(view.isSingleplayer());
+        repaint();
     }
 
     public void actionPerformed(ActionEvent e) {

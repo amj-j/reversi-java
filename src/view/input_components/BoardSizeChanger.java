@@ -22,6 +22,10 @@ public class BoardSizeChanger extends JPanel implements ActionListener {
 
     }
 
+    public void reset() {
+        
+    }
+
     public void addListener(BoardSizeListener listener) {
         listeners.add(listener);
     }

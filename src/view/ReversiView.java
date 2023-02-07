@@ -172,6 +172,20 @@ public class ReversiView extends JFrame implements ReversiModelListener, Reversi
         bottomPanel.setFont();
     }
 
+    public void resetToDefault() {
+        players.get(Owner.PLAYER_1).setName(DefaultViewSettings.PLAYER1_NAME);
+        players.get(Owner.PLAYER_2).setName(DefaultViewSettings.PLAYER2_NAME);
+        players.get(Owner.PLAYER_1).setColor(DefaultViewSettings.PLAYER1_COLOR);
+        players.get(Owner.PLAYER_2).setColor(DefaultViewSettings.PLAYER2_COLOR);
+        board.setHighlightMoves(DefaultViewSettings.HIGHLIGHT_MOVES);
+        board.repaint();
+        topPanel.setFont();
+        topPanel.setValues();
+        bottomPanel.setFont();
+        bottomPanel.setValues();
+        menu.resetSettings();
+    }
+
     public void addTileClickedListener(TileClickedListener listener) {
         board.addListener(listener);
     }
