@@ -3,6 +3,28 @@
 
 A version of the game "Reversi" in the form of a desktop JAVA aplication. AWT and Swing libraries are used for graphical output.
 
+## My motivation
+This is my first object-ortiented programming project with graphic user interface. I coded this in January/February of 2023.
+
+This project is based on an assignment originally given in the "Object-Oriented Programming" course at my university.
+Although I had not yet taken the course at the time, I found the assignment on the course website and decided to complete it as a self-directed challenge.
+My goal was to deepen my understanding of Java and object-oriented programming principles, as well as to prepare myself for the actual course.
+
+I also completed three other assignments from the same course (from previous years) as part of this initiative. 
+These projects can be found on my GitHub: [Monopoly lite](https://github.com/amj-j/monopoly-lite-java), [Reversi](https://github.com/amj-j/reversi-java), and [Rook in maze](https://github.com/amj-j/rook-in-maze-java).
+
+### Goal
+The purpose of this assignment is to understand the foundational principles of GUI development, such as event-driven programming and component-based design, which are also used in modern frameworks, through the Java Swing library.
+
+## Prerequisites
+You need to have Java 1.8 (also known as Java 8) or higher installed on you computer to run this app.
+
+## Installation
+1. Download the ```reversi.jar``` file.
+2. Open your terminal and navigate to folder in which the downloaded ```reversi.jar``` file is located.
+3. Type this command into the terminal to run the app: ```java -jar reversi.jar```.
+4. The app will run in a new window.
+
 ## Gameplay
 ### Rules
 See [Original game](https://cardgames.io/reversi/) for rules.
