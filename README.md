@@ -47,6 +47,9 @@ See [Original game](https://cardgames.io/reversi/) for rules.
   - "Toggle Colors" button - switches the colors of the players
   - "Reset Settings" - resets the settings to default values (this will restart the game)
   - "Close" button - closes the Settings window
+
+### Flaws
+Perfectioning the design of the buttons and components in the Settigns window turned out to be quite extensive, Swing/AWT-specific work, requiring knowledge of what Swing component display parameters are overridden by other parameters. The aim of this project, however, was to practice implementing the architecture of an app with GUI. Therefore, the design of the settings window buttons and components is unfinished. This does however not affect any functionality of the app.
  
 ### Controls
 Click the mouse on a tile to place your disk on it. Other input is just pressing buttons and entering players names from keyboard.
