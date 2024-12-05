@@ -1,10 +1,10 @@
 
 # Reversi
 
-A version of the game "Reversi" in the form of a desktop JAVA aplication. AWT and Swing libraries are used for graphical output.
+A version of the game "Reversi" in the form of a desktop JAVA aplication. AWT and Swing libraries are used for graphical user interface.
 
 ## My motivation
-This is my first object-ortiented programming project with graphic user interface. I coded this in January/February of 2023.
+This is my first object-ortiented programming project with graphical user interface. I coded this in January/February of 2023.
 
 This project is based on an assignment originally given in the "Object-Oriented Programming" course at my university.
 Although I had not yet taken the course at the time, I found the assignment on the course website and decided to complete it as a self-directed challenge.
