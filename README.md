@@ -17,13 +17,15 @@ These projects can be found on my GitHub: [Monopoly lite](https://github.com/amj
 The purpose of this assignment is to practide the foundational principles of GUI development, such as event-driven programming and component-based design, which are also used in modern frameworks, through the Java Swing library.
 
 ## Prerequisites
-You need to have Java 1.8 (also known as Java 8) or higher installed on you computer to run this app.
+You need to have JDK 8 or higher installed on you computer to compile and run this app.
 
 ## Installation
-1. Download the ```reversi.jar``` file.
-2. Open your terminal and navigate to folder in which the downloaded ```reversi.jar``` file is located.
-3. Type this command into the terminal to run the app: ```java -jar reversi.jar```.
-4. The app will run in a new window.
+1. Open your terminal and navigate to folder in which you wish to clone this repository.
+2. Clone this repository using ```git clone https://github.com/amj-j/reversi.git```
+3. In your terminal, navigate inside the new directory created by cloning the repository.
+4. Execute this command to compile the source code: ```javac -d bin $(find src -name "*.java")``` (This command works on Linux, macOS, and Git Bash on Windows but not in Command Prompt or PowerShell. For Windows, use Git Bash terminal for compatibility, or list the source files manually.)
+5. Execute this command to run the app: ```java -cp bin Main```
+6. The app will run in a new window.
 
 ## Gameplay
 ### Rules
